@@ -37,11 +37,7 @@ class PopupViewController : UIViewController {
     }
     
     @IBAction func tapAction(_ sender: UIButton) {
-        if let action = action {
-            action()
-        } else {
-            self.dismiss(animated: true)
-        }
+        self.dismiss(animated: true, completion: action)
     }
     
 }

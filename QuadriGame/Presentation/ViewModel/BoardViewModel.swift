@@ -22,6 +22,8 @@ enum GameState {
     case pickWall
 }
 
+//TODO: 1 - remove all walls, 2 - reset board
+    
 
 protocol BoardViewModelProtocol {
     var pawn : Published<Pawn?>.Publisher { get }
