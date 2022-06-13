@@ -34,6 +34,15 @@
                                                     <constraint firstAttribute="width" secondItem="EQW-tB-knf" secondAttribute="height" multiplier="1:1" id="xA4-oL-XJz"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nay-xA-2NJ">
+                                                <rect key="frame" x="0.0" y="-3" width="32" height="38"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                <connections>
+                                                    <action selector="ontTapReset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JDG-vD-sJD"/>
+                                                </connections>
+                                            </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nre-6g-LGB">
                                                 <rect key="frame" x="342" y="0.5" width="32" height="31"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -41,16 +50,33 @@
                                                     <constraint firstAttribute="width" secondItem="nre-6g-LGB" secondAttribute="height" multiplier="1:1" id="vm9-uG-0SI"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbI-PN-Jew">
+                                                <rect key="frame" x="342" y="-3" width="32" height="38"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                <connections>
+                                                    <action selector="onTapInfo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8b5-QN-3Xo"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="Nay-xA-2NJ" firstAttribute="height" secondItem="EQW-tB-knf" secondAttribute="height" multiplier="1.2" id="4fZ-J7-XOt"/>
+                                            <constraint firstItem="Nay-xA-2NJ" firstAttribute="width" secondItem="EQW-tB-knf" secondAttribute="width" id="8bB-h9-bqd"/>
                                             <constraint firstAttribute="height" constant="32" id="EhA-sj-Cts"/>
+                                            <constraint firstItem="DbI-PN-Jew" firstAttribute="height" secondItem="nre-6g-LGB" secondAttribute="height" multiplier="1.2" id="Gwf-t3-S2b"/>
                                             <constraint firstItem="nre-6g-LGB" firstAttribute="height" secondItem="ynS-b5-YI1" secondAttribute="height" id="Hcd-0u-EDE"/>
                                             <constraint firstAttribute="trailing" secondItem="nre-6g-LGB" secondAttribute="trailing" id="J7r-b3-4St"/>
+                                            <constraint firstItem="DbI-PN-Jew" firstAttribute="centerY" secondItem="nre-6g-LGB" secondAttribute="centerY" id="LMX-tu-0w7"/>
                                             <constraint firstItem="EQW-tB-knf" firstAttribute="top" secondItem="ynS-b5-YI1" secondAttribute="top" id="Lht-Lv-MEG"/>
                                             <constraint firstItem="EQW-tB-knf" firstAttribute="leading" secondItem="ynS-b5-YI1" secondAttribute="leading" id="TZv-6U-fyw"/>
+                                            <constraint firstItem="Nay-xA-2NJ" firstAttribute="centerY" secondItem="EQW-tB-knf" secondAttribute="centerY" id="eFF-iQ-IQ1"/>
+                                            <constraint firstItem="Nay-xA-2NJ" firstAttribute="centerX" secondItem="EQW-tB-knf" secondAttribute="centerX" id="jdR-Ph-xBb"/>
                                             <constraint firstItem="nre-6g-LGB" firstAttribute="top" secondItem="ynS-b5-YI1" secondAttribute="top" id="nKL-1o-Nw6"/>
+                                            <constraint firstItem="DbI-PN-Jew" firstAttribute="width" secondItem="nre-6g-LGB" secondAttribute="width" id="nQc-mV-fXH"/>
                                             <constraint firstItem="EQW-tB-knf" firstAttribute="height" secondItem="ynS-b5-YI1" secondAttribute="height" id="y2L-kd-l3u"/>
+                                            <constraint firstItem="DbI-PN-Jew" firstAttribute="centerX" secondItem="nre-6g-LGB" secondAttribute="centerX" id="z3d-yP-D5s"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aef-y2-1HW">

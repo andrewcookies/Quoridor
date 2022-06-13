@@ -14,9 +14,7 @@ enum PopupType {
     case restart
 }
 
-struct BoardViewNavigation {
-    let showPopup: ( _ type : PopupType, _ callback: @escaping ()->() )->()
-}
+struct BoardViewNavigation { }
 
 enum GameState {
     case freeMove

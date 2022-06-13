@@ -64,16 +64,9 @@ final class BoardViewController: UIViewController {
         
     //MARK: UI handling
     private func setupUI(){
-        handlingActions()
         createBoard()
     }
-    
-    private func handlingActions(){
-        infoUIImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapInfo(_:))))
-        restartUIImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapRestart(_:))))
-        
-    }
-    
+
     private func updateUI( _ state : GameState = .freeMove){
         switch state {
         case .freeMove:
@@ -207,6 +200,44 @@ final class BoardViewController: UIViewController {
         }
     }
     
+    private func showPopup(type : PopupType){
+        let popup = PopupViewController(nibName: "PopupView", bundle: nil)
+        var title : String?
+        var content : String?
+        var button : String?
+        var action : (()->())?
+        
+        switch type {
+        case .win:
+            title = Localized.win_title
+            content = Localized.win_content
+            button = Localized.win_button
+            action = { [weak self] in
+                self?.viewModel?.setGameState(state: .freeMove)
+            }
+        case .rules:
+            title = Localized.rules_title
+            content = Localized.rules_content
+            button = Localized.rules_button
+            action = nil
+        case .restart:
+            title = Localized.restart_title
+            content = Localized.restart_content
+            button = Localized.restart_button
+            action = { [weak self] in
+                self?.viewModel?.setGameState(state: .freeMove)
+            }
+        }
+        popup.popupTitle = title
+        popup.content = content
+        popup.action = action
+        popup.buttonTitle = button
+        
+        popup.modalTransitionStyle = .crossDissolve
+        popup.modalPresentationStyle = .overCurrentContext
+        
+        self.present(popup, animated: true)
+    }
     
     //MARK: Actions
     @objc
@@ -216,15 +247,16 @@ final class BoardViewController: UIViewController {
         viewModel?.makeMove(tag: tag)
     }
                                       
-    @objc
-    func onTapInfo(_ sender: UITapGestureRecognizer){
-        viewModel?.showPopup(type: .rules)
+
+    @IBAction func ontTapReset(_ sender: UIButton) {
+        showPopup(type: .restart)
     }
-                                      
-    @objc
-    func onTapRestart(_ sender: UITapGestureRecognizer){
-        viewModel?.showPopup(type: .restart)
+    
+    @IBAction func onTapInfo(_ sender: UIButton) {
+        showPopup(type: .rules)
     }
+    
+    
     
     @IBAction func onMovePawnTapped(_ sender: UIButton) {
         viewModel?.setGameState(state: .movePawn)
