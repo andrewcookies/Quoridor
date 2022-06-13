@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopupViewController" customModule="QuadriGame" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="3uF-A3-cX8" id="nJ7-up-XHt"/>
+                <outlet property="contentLabel" destination="LWq-fI-PmP" id="I0K-U6-6V4"/>
+                <outlet property="stackContainer" destination="hsI-0l-oX4" id="Suu-c3-3mK"/>
+                <outlet property="titleLabel" destination="Hus-fh-65P" id="u5D-WN-hX4"/>
+                <outlet property="view" destination="iN0-l3-epB" id="IN6-WV-lEP"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hsI-0l-oX4">
+                    <rect key="frame" x="80" y="353" width="254" height="200"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hus-fh-65P">
+                            <rect key="frame" x="10" y="0.0" width="234" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWq-fI-PmP">
+                            <rect key="frame" x="10" y="40.5" width="234" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uF-A3-cX8">
+                            <rect key="frame" x="10" y="81" width="234" height="119"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="LWq-fI-PmP" firstAttribute="leading" secondItem="hsI-0l-oX4" secondAttribute="leading" constant="10" id="E5d-Eq-djs"/>
+                        <constraint firstAttribute="trailing" secondItem="Hus-fh-65P" secondAttribute="trailing" constant="10" id="ERw-BK-cBe"/>
+                        <constraint firstAttribute="trailing" secondItem="3uF-A3-cX8" secondAttribute="trailing" constant="10" id="HdM-Bn-bnr"/>
+                        <constraint firstAttribute="trailing" secondItem="LWq-fI-PmP" secondAttribute="trailing" constant="10" id="JgF-bN-KEw"/>
+                        <constraint firstItem="3uF-A3-cX8" firstAttribute="leading" secondItem="hsI-0l-oX4" secondAttribute="leading" constant="10" id="NRi-vR-NmS"/>
+                        <constraint firstItem="Hus-fh-65P" firstAttribute="leading" secondItem="hsI-0l-oX4" secondAttribute="leading" constant="10" id="RiG-uG-dCU"/>
+                        <constraint firstAttribute="height" constant="200" id="h3e-O8-wKp"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.10905643385283802" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="hsI-0l-oX4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="80" id="8Z5-u9-3BD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hsI-0l-oX4" secondAttribute="trailing" constant="80" id="BEJ-Ti-uHJ"/>
+                <constraint firstItem="hsI-0l-oX4" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="e0z-NK-zOg"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="84"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,36 @@
+/* 
+  Localizable.strings
+  QuadriGame
+
+  Created by Andrea Colussi on 13/06/22.
+  
+*/
+// BoardViewController
+"board.title" = "Quoridor";
+"board.info_move_generic" = "Choose your move";
+"board.move_pawn" = "Move pawn";
+"board.pick_wall" = "Pick up a wall (%@ left)";
+"board.cancel_move" = "Cancel";
+"board.info_move_pawn" = "Tap cell to move your pawn";
+"board.info_put_wall" = "Tap space between cells to put a wall";
+
+//Popup
+"popup.win_title" = "Congratulations";
+"popup.win_content" = "You won the game";
+"popup.win_button" = "Restart";
+"popup.lose_title" = "Oh No!";
+"popup.lose_content" = "You lost the game";
+"popup.lose_button" = "Restart";
+"popup.restart_title" = "Restart";
+"popup.restart_content" = "Do you want to restart the game?";
+"popup.restart_button" = "Yes";
+"popup.rules_title" = "Quoridor";
+"popup.rules_content" = "Move your pawn or put a wall for blocking your opponents.\nThe first player who reaches the opposite site of the board wins.\nYou cannot block completely your opponent with the walls";
+"popup.rules_button" = "Got it!";
+
+
+
+
+
+
+

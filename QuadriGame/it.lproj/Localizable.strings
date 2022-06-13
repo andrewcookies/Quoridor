@@ -1,0 +1,36 @@
+/* 
+  Localizable.strings
+  QuadriGame
+
+  Created by Andrea Colussi on 13/06/22.
+  
+*/
+// BoardViewController
+"board.title" = "Quoridor";
+"board.info_move_generic" = "Scegli la tua mossa";
+"board.move_pawn" = "Muovi il pedone";
+"board.pick_wall" = "Usa un muro (%@ rimasti)";
+"board.cancel_move" = "Annulla";
+"board.info_move_pawn" = "Premi una cella per movere il pedone";
+"board.info_put_wall" = "Premi gli spazi tra le celle per posizionare il muro";
+
+//Popup
+"popup.win_title" = "Congratulazioni";
+"popup.win_content" = "Hai vinto la partita";
+"popup.win_button" = "Ricomincia";
+"popup.lose_title" = "Oh No!";
+"popup.lose_content" = "Hai perso la partita";
+"popup.lose_button" = "Ricomincia";
+"popup.restart_title" = "Ricomincia";
+"popup.restart_content" = "Vuoi ricominciare la partita?";
+"popup.restart_button" = "Si";
+"popup.rules_title" = "Quoridor";
+"popup.rules_content" = "Muovi la tua pedina o posiziona un muro per bloccare l'avversario.\nIl primo giocatore che raggiunge il lato opposto vince.\nNon puoi bloccare completamente il tuo avversario con i muri";
+"popup.rules_button" = "Capito!";
+
+
+
+
+
+
+

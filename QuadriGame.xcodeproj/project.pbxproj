@@ -1,0 +1,712 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AC28C2E5285241F000BC0EA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28C2E4285241F000BC0EA1 /* AppDelegate.swift */; };
+		AC28C2E7285241F000BC0EA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28C2E6285241F000BC0EA1 /* SceneDelegate.swift */; };
+		AC28C2E9285241F000BC0EA1 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28C2E8285241F000BC0EA1 /* BoardViewController.swift */; };
+		AC28C2EC285241F000BC0EA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC28C2EA285241F000BC0EA1 /* Main.storyboard */; };
+		AC28C2EE285241F200BC0EA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC28C2ED285241F200BC0EA1 /* Assets.xcassets */; };
+		AC28C2F1285241F200BC0EA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC28C2EF285241F200BC0EA1 /* LaunchScreen.storyboard */; };
+		AC28C2FC285241F300BC0EA1 /* QuadriGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28C2FB285241F300BC0EA1 /* QuadriGameTests.swift */; };
+		AC28C306285241F300BC0EA1 /* QuadriGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28C305285241F300BC0EA1 /* QuadriGameUITests.swift */; };
+		AC28C308285241F300BC0EA1 /* QuadriGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28C307285241F300BC0EA1 /* QuadriGameUITestsLaunchTests.swift */; };
+		AC4B2CFE2856845700E1E3B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B2CFD2856845700E1E3B5 /* Constants.swift */; };
+		AC5157112854C78C0098837E /* Int+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5157102854C78C0098837E /* Int+Custom.swift */; };
+		AC5157132854CDB50098837E /* Bool+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5157122854CDB50098837E /* Bool+Custom.swift */; };
+		AC89B279285741E600149123 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89B278285741E600149123 /* PopupViewController.swift */; };
+		AC89B27B285741F700149123 /* PopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC89B27A285741F700149123 /* PopupView.xib */; };
+		AC89B281285751D700149123 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89B280285751D700149123 /* Localized.swift */; };
+		AC89B28228576EF200149123 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC89B28428576EF200149123 /* Localizable.strings */; };
+		ACA5EBB22857244200DAD4ED /* BoardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA5EBB12857244200DAD4ED /* BoardCoordinator.swift */; };
+		ACC8F3A7285321E00083F7C9 /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC8F3A6285321E00083F7C9 /* BoardViewModel.swift */; };
+		ACC8F3AD2853241E0083F7C9 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC8F3AC2853241E0083F7C9 /* Wall.swift */; };
+		ACC8F3AF285324340083F7C9 /* Pawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC8F3AE285324340083F7C9 /* Pawn.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AC28C2F8285241F300BC0EA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC28C2D9285241F000BC0EA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC28C2E0285241F000BC0EA1;
+			remoteInfo = QuadriGame;
+		};
+		AC28C302285241F300BC0EA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC28C2D9285241F000BC0EA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC28C2E0285241F000BC0EA1;
+			remoteInfo = QuadriGame;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AC28C2E1285241F000BC0EA1 /* QuadriGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuadriGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC28C2E4285241F000BC0EA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AC28C2E6285241F000BC0EA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		AC28C2E8285241F000BC0EA1 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		AC28C2EB285241F000BC0EA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AC28C2ED285241F200BC0EA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AC28C2F0285241F200BC0EA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AC28C2F2285241F200BC0EA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC28C2F7285241F300BC0EA1 /* QuadriGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuadriGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC28C2FB285241F300BC0EA1 /* QuadriGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadriGameTests.swift; sourceTree = "<group>"; };
+		AC28C301285241F300BC0EA1 /* QuadriGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuadriGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC28C305285241F300BC0EA1 /* QuadriGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadriGameUITests.swift; sourceTree = "<group>"; };
+		AC28C307285241F300BC0EA1 /* QuadriGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadriGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AC4B2CFD2856845700E1E3B5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AC5157102854C78C0098837E /* Int+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Custom.swift"; sourceTree = "<group>"; };
+		AC5157122854CDB50098837E /* Bool+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Custom.swift"; sourceTree = "<group>"; };
+		AC89B278285741E600149123 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		AC89B27A285741F700149123 /* PopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupView.xib; sourceTree = "<group>"; };
+		AC89B280285751D700149123 /* Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
+		AC89B28328576EF200149123 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AC89B28528576F0C00149123 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ACA5EBB12857244200DAD4ED /* BoardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCoordinator.swift; sourceTree = "<group>"; };
+		ACC8F3A6285321E00083F7C9 /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
+		ACC8F3AC2853241E0083F7C9 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		ACC8F3AE285324340083F7C9 /* Pawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pawn.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC28C2DE285241F000BC0EA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC28C2F4285241F300BC0EA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC28C2FE285241F300BC0EA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AC28C2D8285241F000BC0EA1 = {
+			isa = PBXGroup;
+			children = (
+				AC28C2E3285241F000BC0EA1 /* QuadriGame */,
+				AC28C2FA285241F300BC0EA1 /* QuadriGameTests */,
+				AC28C304285241F300BC0EA1 /* QuadriGameUITests */,
+				AC28C2E2285241F000BC0EA1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AC28C2E2285241F000BC0EA1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC28C2E1285241F000BC0EA1 /* QuadriGame.app */,
+				AC28C2F7285241F300BC0EA1 /* QuadriGameTests.xctest */,
+				AC28C301285241F300BC0EA1 /* QuadriGameUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AC28C2E3285241F000BC0EA1 /* QuadriGame */ = {
+			isa = PBXGroup;
+			children = (
+				AC51570C2854C6120098837E /* Utils */,
+				ACC8F3A8285323D10083F7C9 /* Presentation */,
+				AC28C2E4285241F000BC0EA1 /* AppDelegate.swift */,
+				AC28C2E6285241F000BC0EA1 /* SceneDelegate.swift */,
+				AC28C2EA285241F000BC0EA1 /* Main.storyboard */,
+				AC28C2ED285241F200BC0EA1 /* Assets.xcassets */,
+				AC28C2EF285241F200BC0EA1 /* LaunchScreen.storyboard */,
+				AC28C2F2285241F200BC0EA1 /* Info.plist */,
+				AC89B28428576EF200149123 /* Localizable.strings */,
+			);
+			path = QuadriGame;
+			sourceTree = "<group>";
+		};
+		AC28C2FA285241F300BC0EA1 /* QuadriGameTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC28C2FB285241F300BC0EA1 /* QuadriGameTests.swift */,
+			);
+			path = QuadriGameTests;
+			sourceTree = "<group>";
+		};
+		AC28C304285241F300BC0EA1 /* QuadriGameUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AC28C305285241F300BC0EA1 /* QuadriGameUITests.swift */,
+				AC28C307285241F300BC0EA1 /* QuadriGameUITestsLaunchTests.swift */,
+			);
+			path = QuadriGameUITests;
+			sourceTree = "<group>";
+		};
+		AC51570C2854C6120098837E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AC51570D2854C6200098837E /* Extension */,
+				AC4B2CFD2856845700E1E3B5 /* Constants.swift */,
+				AC89B280285751D700149123 /* Localized.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		AC51570D2854C6200098837E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AC5157102854C78C0098837E /* Int+Custom.swift */,
+				AC5157122854CDB50098837E /* Bool+Custom.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		ACC8F3A8285323D10083F7C9 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				ACC8F3AB2853240F0083F7C9 /* Model */,
+				ACC8F3AA285323F10083F7C9 /* ViewModel */,
+				ACC8F3A9285323E70083F7C9 /* ViewControllers */,
+				ACA5EBB12857244200DAD4ED /* BoardCoordinator.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		ACC8F3A9285323E70083F7C9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AC28C2E8285241F000BC0EA1 /* BoardViewController.swift */,
+				AC89B278285741E600149123 /* PopupViewController.swift */,
+				AC89B27A285741F700149123 /* PopupView.xib */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		ACC8F3AA285323F10083F7C9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ACC8F3A6285321E00083F7C9 /* BoardViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ACC8F3AB2853240F0083F7C9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ACC8F3AC2853241E0083F7C9 /* Wall.swift */,
+				ACC8F3AE285324340083F7C9 /* Pawn.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AC28C2E0285241F000BC0EA1 /* QuadriGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC28C30B285241F300BC0EA1 /* Build configuration list for PBXNativeTarget "QuadriGame" */;
+			buildPhases = (
+				AC28C2DD285241F000BC0EA1 /* Sources */,
+				AC28C2DE285241F000BC0EA1 /* Frameworks */,
+				AC28C2DF285241F000BC0EA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuadriGame;
+			productName = QuadriGame;
+			productReference = AC28C2E1285241F000BC0EA1 /* QuadriGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AC28C2F6285241F300BC0EA1 /* QuadriGameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC28C30E285241F300BC0EA1 /* Build configuration list for PBXNativeTarget "QuadriGameTests" */;
+			buildPhases = (
+				AC28C2F3285241F300BC0EA1 /* Sources */,
+				AC28C2F4285241F300BC0EA1 /* Frameworks */,
+				AC28C2F5285241F300BC0EA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC28C2F9285241F300BC0EA1 /* PBXTargetDependency */,
+			);
+			name = QuadriGameTests;
+			productName = QuadriGameTests;
+			productReference = AC28C2F7285241F300BC0EA1 /* QuadriGameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AC28C300285241F300BC0EA1 /* QuadriGameUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC28C311285241F300BC0EA1 /* Build configuration list for PBXNativeTarget "QuadriGameUITests" */;
+			buildPhases = (
+				AC28C2FD285241F300BC0EA1 /* Sources */,
+				AC28C2FE285241F300BC0EA1 /* Frameworks */,
+				AC28C2FF285241F300BC0EA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC28C303285241F300BC0EA1 /* PBXTargetDependency */,
+			);
+			name = QuadriGameUITests;
+			productName = QuadriGameUITests;
+			productReference = AC28C301285241F300BC0EA1 /* QuadriGameUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AC28C2D9285241F000BC0EA1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					AC28C2E0285241F000BC0EA1 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					AC28C2F6285241F300BC0EA1 = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = AC28C2E0285241F000BC0EA1;
+					};
+					AC28C300285241F300BC0EA1 = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = AC28C2E0285241F000BC0EA1;
+					};
+				};
+			};
+			buildConfigurationList = AC28C2DC285241F000BC0EA1 /* Build configuration list for PBXProject "QuadriGame" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				it,
+			);
+			mainGroup = AC28C2D8285241F000BC0EA1;
+			productRefGroup = AC28C2E2285241F000BC0EA1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC28C2E0285241F000BC0EA1 /* QuadriGame */,
+				AC28C2F6285241F300BC0EA1 /* QuadriGameTests */,
+				AC28C300285241F300BC0EA1 /* QuadriGameUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AC28C2DF285241F000BC0EA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC89B28228576EF200149123 /* Localizable.strings in Resources */,
+				AC28C2F1285241F200BC0EA1 /* LaunchScreen.storyboard in Resources */,
+				AC89B27B285741F700149123 /* PopupView.xib in Resources */,
+				AC28C2EE285241F200BC0EA1 /* Assets.xcassets in Resources */,
+				AC28C2EC285241F000BC0EA1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC28C2F5285241F300BC0EA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC28C2FF285241F300BC0EA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC28C2DD285241F000BC0EA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC89B279285741E600149123 /* PopupViewController.swift in Sources */,
+				AC89B281285751D700149123 /* Localized.swift in Sources */,
+				AC28C2E9285241F000BC0EA1 /* BoardViewController.swift in Sources */,
+				AC28C2E5285241F000BC0EA1 /* AppDelegate.swift in Sources */,
+				AC5157112854C78C0098837E /* Int+Custom.swift in Sources */,
+				ACC8F3AD2853241E0083F7C9 /* Wall.swift in Sources */,
+				AC28C2E7285241F000BC0EA1 /* SceneDelegate.swift in Sources */,
+				ACC8F3A7285321E00083F7C9 /* BoardViewModel.swift in Sources */,
+				AC5157132854CDB50098837E /* Bool+Custom.swift in Sources */,
+				ACC8F3AF285324340083F7C9 /* Pawn.swift in Sources */,
+				AC4B2CFE2856845700E1E3B5 /* Constants.swift in Sources */,
+				ACA5EBB22857244200DAD4ED /* BoardCoordinator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC28C2F3285241F300BC0EA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC28C2FC285241F300BC0EA1 /* QuadriGameTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC28C2FD285241F300BC0EA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC28C308285241F300BC0EA1 /* QuadriGameUITestsLaunchTests.swift in Sources */,
+				AC28C306285241F300BC0EA1 /* QuadriGameUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC28C2F9285241F300BC0EA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC28C2E0285241F000BC0EA1 /* QuadriGame */;
+			targetProxy = AC28C2F8285241F300BC0EA1 /* PBXContainerItemProxy */;
+		};
+		AC28C303285241F300BC0EA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC28C2E0285241F000BC0EA1 /* QuadriGame */;
+			targetProxy = AC28C302285241F300BC0EA1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AC28C2EA285241F000BC0EA1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC28C2EB285241F000BC0EA1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AC28C2EF285241F200BC0EA1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC28C2F0285241F200BC0EA1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		AC89B28428576EF200149123 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC89B28328576EF200149123 /* en */,
+				AC89B28528576F0C00149123 /* it */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AC28C309285241F300BC0EA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AC28C30A285241F300BC0EA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AC28C30C285241F300BC0EA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J9FBX28X7;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuadriGame/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.QuadriGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AC28C30D285241F300BC0EA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J9FBX28X7;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuadriGame/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.QuadriGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AC28C30F285241F300BC0EA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J9FBX28X7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.QuadriGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuadriGame.app/QuadriGame";
+			};
+			name = Debug;
+		};
+		AC28C310285241F300BC0EA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J9FBX28X7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.QuadriGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuadriGame.app/QuadriGame";
+			};
+			name = Release;
+		};
+		AC28C312285241F300BC0EA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J9FBX28X7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.QuadriGameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = QuadriGame;
+			};
+			name = Debug;
+		};
+		AC28C313285241F300BC0EA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J9FBX28X7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.QuadriGameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = QuadriGame;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AC28C2DC285241F000BC0EA1 /* Build configuration list for PBXProject "QuadriGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC28C309285241F300BC0EA1 /* Debug */,
+				AC28C30A285241F300BC0EA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC28C30B285241F300BC0EA1 /* Build configuration list for PBXNativeTarget "QuadriGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC28C30C285241F300BC0EA1 /* Debug */,
+				AC28C30D285241F300BC0EA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC28C30E285241F300BC0EA1 /* Build configuration list for PBXNativeTarget "QuadriGameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC28C30F285241F300BC0EA1 /* Debug */,
+				AC28C310285241F300BC0EA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC28C311285241F300BC0EA1 /* Build configuration list for PBXNativeTarget "QuadriGameUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC28C312285241F300BC0EA1 /* Debug */,
+				AC28C313285241F300BC0EA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AC28C2D9285241F000BC0EA1 /* Project object */;
+}
