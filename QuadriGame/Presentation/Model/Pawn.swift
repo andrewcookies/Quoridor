@@ -18,6 +18,10 @@ struct Pawn {
         return Pawn(id: 84)
     }
     
+    var isWinPawn : Bool {
+        return (0...9).contains(self.id)
+    }
+        
     static func ==(lhs: inout Pawn, rhs: Pawn) -> Bool {
         return lhs.id == rhs.id
     }
