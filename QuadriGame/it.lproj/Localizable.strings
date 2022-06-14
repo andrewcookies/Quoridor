@@ -27,6 +27,9 @@
 "popup.rules_title" = "Quoridor";
 "popup.rules_content" = "Muovi la tua pedina o posiziona un muro per bloccare l'avversario.\nIl primo giocatore che raggiunge il lato opposto vince.\nNon puoi bloccare completamente il tuo avversario con i muri";
 "popup.rules_button" = "Capito!";
+"popup.conflict_wall_title" = "Attenzione";
+"popup.conflict_wall_content" = "Il tuo muro è posizionato sopra un altro muro";
+"popup.conflict_wall_button" = "Capito!";
 
 
 

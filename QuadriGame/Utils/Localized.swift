@@ -29,6 +29,9 @@ class Localized {
     static var rules_title : String { return String(localized: "popup.rules_title") }
     static var rules_content : String { return String(localized: "popup.rules_content") }
     static var rules_button : String { return String(localized: "popup.rules_button") }
+    static var conflict_wall_title : String { return String(localized: "popup.conflict_wall_title") }
+    static var conflict_wall_content : String { return String(localized: "popup.conflict_wall_content") }
+    static var conflict_wall_button : String { return String(localized: "popup.conflict_wall_button") }
         
 }
 

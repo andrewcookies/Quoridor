@@ -8,6 +8,13 @@
 import Foundation
 import UIKit
 
+enum PopupType {
+    case win
+    case rules
+    case restart
+    case conflictWall
+}
+
 class PopupViewController : UIViewController {
     
     @IBOutlet weak private var titleLabel : UILabel!
@@ -41,6 +48,10 @@ class PopupViewController : UIViewController {
             title = Localized.restart_title
             content = Localized.restart_content
             button = Localized.restart_button
+        case .conflictWall:
+            title = Localized.conflict_wall_title
+            content = Localized.conflict_wall_content
+            button = Localized.conflict_wall_button
         }
     
         titleLabel.text = title ?? ""

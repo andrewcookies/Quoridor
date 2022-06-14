@@ -8,11 +8,7 @@
 import Foundation
 import Combine
 
-enum PopupType {
-    case win
-    case rules
-    case restart
-}
+
 
 struct BoardViewNavigation { }
 
@@ -34,7 +30,6 @@ protocol BoardViewModelProtocol {
     
     func makeMove(tag : Int)
     func setGameState(state : GameState)
-    func showPopup(type : PopupType)
 }
 
 
@@ -57,10 +52,12 @@ class BoardViewModel {
     func putWall(tagView: Int) {
         guard let walls = wallsOnBoard else { return }
         let candidateWall = Wall(firstWall: tagView, secondWall: tagView.isVerticalWall ? (tagView-10) : (tagView+1))
+        gs = .freeMove
         if walls.contains(where: { $0.conflicts(wall: candidateWall) }).not {
             newWall = candidateWall
-            gs = .freeMove
             wallsOnBoard?.append(candidateWall)
+        } else {
+            newWall = nil
         }
     }
     
@@ -145,17 +142,6 @@ extension BoardViewModel : BoardViewModelProtocol {
         }
     }
     
-    func showPopup(type : PopupType) {
-        switch type {
-        case .win:
-            break
-        case .rules:
-            break
-        case .restart:
-            break
-        }
-
-    }
     
     
 }

@@ -27,6 +27,10 @@ final class BoardViewController: UIViewController {
     private var currentPawn = Pawn.starterPawn {
         didSet{
             addPawn(pawn: currentPawn)
+            if currentPawn.isWinPawn {
+                showPopup(type: .win)
+            }
+            
         }
     }
 
@@ -46,10 +50,14 @@ final class BoardViewController: UIViewController {
         }).store(in: &subscribers)
         
         viewModel?.wall.receive(on: DispatchQueue.main).sink(receiveValue: { [weak self] newWall in
-            guard let self = self, let newWall = newWall else { return }
-            print("newWall: \(newWall.firstWall) - \(newWall.secondWall)")
-            
-            self.addWall(newWall: newWall)
+            guard let self = self else { return }
+            if let wall = newWall {
+                print("newWall: \(wall.firstWall) - \(wall.secondWall)")
+                self.addWall(newWall: wall)
+            } else {
+                //conflict
+                self.showPopup(type: .conflictWall)
+            }
 
         }).store(in: &subscribers)
         
@@ -221,9 +229,9 @@ final class BoardViewController: UIViewController {
         switch type {
         case .win:
             action = { [weak self] in
-                self?.viewModel?.setGameState(state: .freeMove)
+                self?.viewModel?.setGameState(state: .reset)
             }
-        case .rules:
+        case .rules, .conflictWall:
             action = nil
         case .restart:
             action = { [weak self] in

@@ -23,6 +23,6 @@ struct Wall {
     let secondWall : Int
     
     func conflicts(wall : Wall) -> Bool {
-        return (firstWall == wall.firstWall || secondWall == wall.firstWall || firstWall == wall.secondWall)
+        return (firstWall == wall.firstWall || secondWall == wall.firstWall || firstWall == wall.secondWall || firstWall == wall.secondWall + 100 )
     }
 }

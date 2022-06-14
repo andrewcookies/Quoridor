@@ -27,7 +27,9 @@
 "popup.rules_title" = "Quoridor";
 "popup.rules_content" = "Move your pawn or put a wall for blocking your opponents.\nThe first player who reaches the opposite site of the board wins.\nYou cannot block completely your opponent with the walls";
 "popup.rules_button" = "Got it!";
-
+"popup.conflict_wall_title" = "Warning";
+"popup.conflict_wall_content" = "Yout wall is over another wall";
+"popup.conflict_wall_button" = "Got it!";
 
 
 
