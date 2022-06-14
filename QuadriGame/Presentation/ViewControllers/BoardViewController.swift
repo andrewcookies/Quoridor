@@ -12,7 +12,6 @@ import Combine
 
 final class BoardViewController: UIViewController {
 
-    let pawnTag = 1000
     
     var viewModel : BoardViewModelProtocol?
     
@@ -23,7 +22,7 @@ final class BoardViewController: UIViewController {
     @IBOutlet weak var restartUIImage: UIImageView!
     @IBOutlet weak var infoUIImage: UIImageView!
     
-    
+    private var pawnTag : Int { return Constant.pawnTag }
     private var subscribers: [AnyCancellable] = []
     private var currentPawn = Pawn.starterPawn {
         didSet{
@@ -72,7 +71,7 @@ final class BoardViewController: UIViewController {
         case .freeMove, .reset:
             if state == .reset {
                 removeWalls()
-                addPawn(pawn: Pawn.starterPawn)
+                currentPawn = Pawn.starterPawn
             }
             
             infoMoveLabel.text = Localized.info_move_generic
@@ -121,7 +120,7 @@ final class BoardViewController: UIViewController {
     
     private func removeWalls(){
         if let walls = viewModel?.wallsOnBench {
-            for i in 1001...1000+walls {
+            for i in (pawnTag+1)...(pawnTag+walls) {
                 let wall = self.boardView.viewWithTag(i)
                 wall?.removeFromSuperview()
             }
@@ -147,7 +146,7 @@ final class BoardViewController: UIViewController {
         
         let wall = UIView(frame: CGRect(origin: origin ?? CGPoint.zero, size: CGSize(width: joinWallW, height: joinWallH)))
         wall.backgroundColor = .brown
-        wall.tag = 1000 + (viewModel?.wallsOnBench ?? 0)
+        wall.tag = pawnTag + (viewModel?.wallsOnBench ?? 0)
         
         self.boardView.addSubview(wall)
         
@@ -217,36 +216,22 @@ final class BoardViewController: UIViewController {
     
     private func showPopup(type : PopupType){
         let popup = PopupViewController(nibName: "PopupView", bundle: nil)
-        var title : String?
-        var content : String?
-        var button : String?
         var action : (()->())?
         
         switch type {
         case .win:
-            title = Localized.win_title
-            content = Localized.win_content
-            button = Localized.win_button
             action = { [weak self] in
                 self?.viewModel?.setGameState(state: .freeMove)
             }
         case .rules:
-            title = Localized.rules_title
-            content = Localized.rules_content
-            button = Localized.rules_button
             action = nil
         case .restart:
-            title = Localized.restart_title
-            content = Localized.restart_content
-            button = Localized.restart_button
             action = { [weak self] in
                 self?.viewModel?.setGameState(state: .reset)
             }
         }
-        popup.popupTitle = title
-        popup.content = content
+        popup.type = type
         popup.action = action
-        popup.buttonTitle = button
         
         popup.modalTransitionStyle = .crossDissolve
         popup.modalPresentationStyle = .overCurrentContext

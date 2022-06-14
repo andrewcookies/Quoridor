@@ -9,6 +9,8 @@ import Foundation
 
 final class Constant {
     
+    static let pawnTag = 1000
+    
     static let percentageHeightCellOnBoard = 0.10
     static let percentageWidthCellOnBoard = 0.10
     static let percentageWidthVerticalBarOnCell = 0.20

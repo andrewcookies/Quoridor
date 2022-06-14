@@ -19,12 +19,33 @@ class PopupViewController : UIViewController {
     var content : String?
     var action : (()->())?
     var buttonTitle : String?
+    var type : PopupType = .rules
     
     override func viewDidLoad() {
         mainView.layer.cornerRadius = 4
-        titleLabel.text = popupTitle ?? ""
+
+        var title : String?
+        var content : String?
+        var button : String?
+        
+        switch type {
+        case .win:
+            title = Localized.win_title
+            content = Localized.win_content
+            button = Localized.win_button
+        case .rules:
+            title = Localized.rules_title
+            content = Localized.rules_content
+            button = Localized.rules_button
+        case .restart:
+            title = Localized.restart_title
+            content = Localized.restart_content
+            button = Localized.restart_button
+        }
+    
+        titleLabel.text = title ?? ""
         contentLabel.text = content ?? ""
-        actionButton.setTitle(buttonTitle ?? "", for: .normal)
+        actionButton.setTitle(button  ?? "", for: .normal)
     }
     
 
