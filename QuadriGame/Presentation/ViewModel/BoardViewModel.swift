@@ -140,6 +140,11 @@ extension BoardViewModel : BoardViewModelProtocol {
         } else {
             gs = state
         }
+        
+        if state == .reset {
+            walls_OnBoard?.removeAll()
+        }
+        
     }
     
     

@@ -24,6 +24,8 @@ final class BoardViewController: UIViewController {
     
     private var pawnTag : Int { return Constant.pawnTag }
     private var wallsOnBench : Int { return Constant.totaleWallsInGame - (viewModel?.wallsOnBoard ?? 0) }
+    private var wallsTagOnBench : [Int] = []
+    
     private var subscribers: [AnyCancellable] = []
     private var currentPawn = Pawn.starterPawn {
         didSet{
@@ -128,12 +130,11 @@ final class BoardViewController: UIViewController {
     }
     
     private func removeWalls(){
-        if let walls = viewModel?.wallsOnBoard{
-            for i in (pawnTag+1)...(pawnTag+walls) {
-                let wall = self.boardView.viewWithTag(i)
-                wall?.removeFromSuperview()
-            }
+        for i in wallsTagOnBench {
+            let wall = self.boardView.viewWithTag(i)
+            wall?.removeFromSuperview()
         }
+        wallsTagOnBench.removeAll()
     }
     
     private func addWall( newWall : Wall){
@@ -155,7 +156,10 @@ final class BoardViewController: UIViewController {
         
         let wall = UIView(frame: CGRect(origin: origin ?? CGPoint.zero, size: CGSize(width: joinWallW, height: joinWallH)))
         wall.backgroundColor = .brown
-        wall.tag = pawnTag + (viewModel?.wallsOnBoard ?? 0)
+        
+        let tag = pawnTag + (viewModel?.wallsOnBoard ?? 0)
+        wall.tag = tag
+        wallsTagOnBench.append(tag)
         
         self.boardView.addSubview(wall)
         
