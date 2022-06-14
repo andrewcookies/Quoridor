@@ -20,6 +20,7 @@ enum GameState {
     case freeMove
     case movePawn
     case pickWall
+    case reset
 }
 
 //TODO: 1 - remove all walls, 2 - reset board

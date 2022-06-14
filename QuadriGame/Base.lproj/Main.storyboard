@@ -87,7 +87,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oXO-Xk-LK6">
-                                        <rect key="frame" x="0.0" y="644" width="414" height="130"/>
+                                        <rect key="frame" x="0.0" y="624" width="414" height="130"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkW-uG-k7j">
                                                 <rect key="frame" x="10" y="0.0" width="394" height="20.5"/>
@@ -139,7 +139,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="art-Av-Tou" secondAttribute="trailing" id="7g5-MI-ZPM"/>
                                     <constraint firstItem="art-Av-Tou" firstAttribute="top" secondItem="McX-WL-BJi" secondAttribute="top" id="A3T-HE-ggJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="oXO-Xk-LK6" secondAttribute="bottom" id="CVA-Lx-yW5"/>
+                                    <constraint firstAttribute="bottom" secondItem="oXO-Xk-LK6" secondAttribute="bottom" constant="20" id="CVA-Lx-yW5"/>
                                     <constraint firstItem="Aef-y2-1HW" firstAttribute="top" secondItem="ynS-b5-YI1" secondAttribute="bottom" constant="20" id="K3j-14-Ddu"/>
                                     <constraint firstItem="art-Av-Tou" firstAttribute="leading" secondItem="McX-WL-BJi" secondAttribute="leading" id="LLk-ar-glP"/>
                                     <constraint firstAttribute="trailing" secondItem="ynS-b5-YI1" secondAttribute="trailing" constant="20" id="Oik-89-Lwh"/>

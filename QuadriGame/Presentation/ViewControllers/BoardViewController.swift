@@ -69,7 +69,12 @@ final class BoardViewController: UIViewController {
 
     private func updateUI( _ state : GameState = .freeMove){
         switch state {
-        case .freeMove:
+        case .freeMove, .reset:
+            if state == .reset {
+                removeWalls()
+                addPawn(pawn: Pawn.starterPawn)
+            }
+            
             infoMoveLabel.text = Localized.info_move_generic
             
             movePawnButton.setTitle(Localized.move_pawn, for: .normal)
@@ -114,6 +119,15 @@ final class BoardViewController: UIViewController {
         
     }
     
+    private func removeWalls(){
+        if let walls = viewModel?.wallsOnBench {
+            for i in 1001...1000+walls {
+                let wall = self.boardView.viewWithTag(i)
+                wall?.removeFromSuperview()
+            }
+        }
+    }
+    
     private func addWall( newWall : Wall){
         
         let firstWallView = self.boardView.viewWithTag(newWall.firstWall)
@@ -133,6 +147,7 @@ final class BoardViewController: UIViewController {
         
         let wall = UIView(frame: CGRect(origin: origin ?? CGPoint.zero, size: CGSize(width: joinWallW, height: joinWallH)))
         wall.backgroundColor = .brown
+        wall.tag = 1000 + (viewModel?.wallsOnBench ?? 0)
         
         self.boardView.addSubview(wall)
         
@@ -225,7 +240,7 @@ final class BoardViewController: UIViewController {
             content = Localized.restart_content
             button = Localized.restart_button
             action = { [weak self] in
-                self?.viewModel?.setGameState(state: .freeMove)
+                self?.viewModel?.setGameState(state: .reset)
             }
         }
         popup.popupTitle = title
