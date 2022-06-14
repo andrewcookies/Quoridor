@@ -26,7 +26,7 @@ protocol BoardViewModelProtocol {
     var pawn : Published<Pawn?>.Publisher { get }
     var wall : Published<Wall?>.Publisher { get }
     var gameState : Published<GameState?>.Publisher { get }
-    var wallsOnBench : Int { get }
+    var wallsOnBoard : Int { get }
     
     func makeMove(tag : Int)
     func setGameState(state : GameState)
@@ -36,7 +36,7 @@ protocol BoardViewModelProtocol {
 class BoardViewModel {
     
     private let navigation : BoardViewNavigation?
-    private var wallsOnBoard : [Wall]?
+    private var walls_OnBoard : [Wall]?
     @Published private var pawnPosition : Pawn?
     @Published private var newWall : Wall?
     @Published private var gs : GameState?
@@ -45,24 +45,24 @@ class BoardViewModel {
     init(navigation : BoardViewNavigation) {
         self.navigation = navigation
         pawnPosition = Pawn.starterPawn
-        wallsOnBoard = []
+        walls_OnBoard = []
         gs = .freeMove
     }
     
     func putWall(tagView: Int) {
-        guard let walls = wallsOnBoard else { return }
+        guard let walls = walls_OnBoard else { return }
         let candidateWall = Wall(firstWall: tagView, secondWall: tagView.isVerticalWall ? (tagView-10) : (tagView+1))
         gs = .freeMove
         if walls.contains(where: { $0.conflicts(wall: candidateWall) }).not {
             newWall = candidateWall
-            wallsOnBoard?.append(candidateWall)
+            walls_OnBoard?.append(candidateWall)
         } else {
             newWall = nil
         }
     }
     
     func movePawn(tagView: Int) {
-        guard let currentId = pawnPosition?.id, let walls = wallsOnBoard else { return }
+        guard let currentId = pawnPosition?.id, let walls = walls_OnBoard else { return }
         if currentId == tagView {
             // do nothing in this moment, the pawn does not move
             
@@ -106,8 +106,8 @@ extension BoardViewModel : BoardViewModelProtocol {
         $gs
     }
     
-    var wallsOnBench: Int {
-        return 10 - (wallsOnBoard?.count ?? 0)
+    var wallsOnBoard: Int {
+        return walls_OnBoard?.count ?? 0
     }
     
     var pawn: Published<Pawn?>.Publisher {

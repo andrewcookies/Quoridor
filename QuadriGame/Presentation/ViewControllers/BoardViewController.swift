@@ -23,6 +23,7 @@ final class BoardViewController: UIViewController {
     @IBOutlet weak var infoUIImage: UIImageView!
     
     private var pawnTag : Int { return Constant.pawnTag }
+    private var wallsOnBench : Int { return Constant.totaleWallsInGame - (viewModel?.wallsOnBoard ?? 0) }
     private var subscribers: [AnyCancellable] = []
     private var currentPawn = Pawn.starterPawn {
         didSet{
@@ -88,7 +89,7 @@ final class BoardViewController: UIViewController {
             movePawnButton.isUserInteractionEnabled = true
             movePawnButton.alpha = 1
             
-            let title = String(format: Localized.pick_wall, "\(viewModel?.wallsOnBench ?? 0)")
+            let title = String(format: Localized.pick_wall, "\(wallsOnBench)")
             pickUpWallButton.setTitle(title, for: .normal)
             pickUpWallButton.isUserInteractionEnabled = true
             pickUpWallButton.alpha = 1
@@ -102,7 +103,7 @@ final class BoardViewController: UIViewController {
             movePawnButton.isUserInteractionEnabled = true
             movePawnButton.alpha = 1
             
-            let title = String(format: Localized.pick_wall, "\(viewModel?.wallsOnBench ?? 0)")
+            let title = String(format: Localized.pick_wall, "\(wallsOnBench)")
             pickUpWallButton.setTitle(title, for: .normal)
             pickUpWallButton.isUserInteractionEnabled = false
             pickUpWallButton.alpha = 0.5
@@ -127,7 +128,7 @@ final class BoardViewController: UIViewController {
     }
     
     private func removeWalls(){
-        if let walls = viewModel?.wallsOnBench {
+        if let walls = viewModel?.wallsOnBoard{
             for i in (pawnTag+1)...(pawnTag+walls) {
                 let wall = self.boardView.viewWithTag(i)
                 wall?.removeFromSuperview()
@@ -154,7 +155,7 @@ final class BoardViewController: UIViewController {
         
         let wall = UIView(frame: CGRect(origin: origin ?? CGPoint.zero, size: CGSize(width: joinWallW, height: joinWallH)))
         wall.backgroundColor = .brown
-        wall.tag = pawnTag + (viewModel?.wallsOnBench ?? 0)
+        wall.tag = pawnTag + (viewModel?.wallsOnBoard ?? 0)
         
         self.boardView.addSubview(wall)
         
