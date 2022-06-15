@@ -26,6 +26,7 @@
 		AC9064992859BF0400EAEC36 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9064982859BF0400EAEC36 /* Board.swift */; };
 		AC90649B2859C64900EAEC36 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC90649A2859C64900EAEC36 /* Cell.swift */; };
 		AC90649D2859CF6B00EAEC36 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC90649C2859CF6B00EAEC36 /* Player.swift */; };
+		AC90649F2859DDFD00EAEC36 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC90649E2859DDFD00EAEC36 /* Move.swift */; };
 		ACA5EBB22857244200DAD4ED /* BoardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA5EBB12857244200DAD4ED /* BoardCoordinator.swift */; };
 		ACC8F3A7285321E00083F7C9 /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC8F3A6285321E00083F7C9 /* BoardViewModel.swift */; };
 		ACC8F3AD2853241E0083F7C9 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC8F3AC2853241E0083F7C9 /* Wall.swift */; };
@@ -74,6 +75,7 @@
 		AC9064982859BF0400EAEC36 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		AC90649A2859C64900EAEC36 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		AC90649C2859CF6B00EAEC36 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		AC90649E2859DDFD00EAEC36 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		ACA5EBB12857244200DAD4ED /* BoardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCoordinator.swift; sourceTree = "<group>"; };
 		ACC8F3A6285321E00083F7C9 /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
 		ACC8F3AC2853241E0083F7C9 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				AC9064982859BF0400EAEC36 /* Board.swift */,
 				AC90649A2859C64900EAEC36 /* Cell.swift */,
 				AC90649C2859CF6B00EAEC36 /* Player.swift */,
+				AC90649E2859DDFD00EAEC36 /* Move.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				AC90649B2859C64900EAEC36 /* Cell.swift in Sources */,
 				AC5157132854CDB50098837E /* Bool+Custom.swift in Sources */,
 				ACC8F3AF285324340083F7C9 /* Pawn.swift in Sources */,
+				AC90649F2859DDFD00EAEC36 /* Move.swift in Sources */,
 				AC4B2CFE2856845700E1E3B5 /* Constants.swift in Sources */,
 				AC90649D2859CF6B00EAEC36 /* Player.swift in Sources */,
 				ACA5EBB22857244200DAD4ED /* BoardCoordinator.swift in Sources */,

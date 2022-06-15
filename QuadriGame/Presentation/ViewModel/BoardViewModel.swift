@@ -34,7 +34,7 @@ protocol BoardViewModelProtocol {
 }
 
 
-class BoardViewModel {
+class BoardViewModel: NSObject {
     
     private let navigation : BoardViewNavigation?
     
@@ -58,11 +58,19 @@ class BoardViewModel {
         return (player as! Player).isWin()
     }
     
+    func canPutWall(wall : Wall) -> Bool {
+        guard let walls = walls_OnBoard else { return false }
+        if walls.contains(where: { $0.conflicts(wall: wall) }).not && wallsOnBoard < Constant.totaleWallsInGame {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func putWall(tagView: Int) {
-        guard let walls = walls_OnBoard else { return }
-        let candidateWall = Wall(firstWall: tagView, secondWall: tagView.isVerticalWall ? (tagView-10) : (tagView+1))
         gs = .freeMove
-        if walls.contains(where: { $0.conflicts(wall: candidateWall) }).not {
+        let candidateWall = Wall(firstWall: tagView, secondWall: tagView.isVerticalWall ? (tagView-10) : (tagView+1))
+        if canPutWall(wall: candidateWall) {
             newWall = candidateWall
             walls_OnBoard?.append(candidateWall)
         } else {
@@ -70,11 +78,11 @@ class BoardViewModel {
         }
     }
     
-    func movePawn(tagView: Int) {
-        guard let currentId = pawnPosition?.id, let walls = walls_OnBoard else { return }
+    func canMovePawn( tagView: Int ) -> Bool {
+        guard let currentId = pawnPosition?.id, let walls = walls_OnBoard else { return false }
         if currentId == tagView {
             // do nothing in this moment, the pawn does not move
-            
+            return false
         } else {
             //check if I can move or there's a wall
             let translation = tagView - currentId
@@ -101,10 +109,18 @@ class BoardViewModel {
             }
             if let w = wall {
                 if walls.contains(where: { $0.firstWall == w || $0.secondWall == w }).not {
-                    pawnPosition = Pawn(id: tagView)
-                    gs = .freeMove
+                    return true
                 }
             }
+            
+            return false
+        }
+    }
+    
+    func movePawn(tagView: Int) {
+        if canMovePawn(tagView: tagView){
+            pawnPosition = Pawn(id: tagView)
+            gs = .freeMove
         }
     }
 }
@@ -167,6 +183,80 @@ extension BoardViewModel : BoardViewModelProtocol {
         }
                  
         //update UI
+    }
+    
+    
+}
+
+//MARK: IA
+
+extension BoardViewModel : GKGameModel {
+    
+    var players: [GKGameModelPlayer]? {
+        return Player.allPlayers
+    }
+    
+    var activePlayer: GKGameModelPlayer? {
+        return currentPlayer
+    }
+    
+    func setGameModel(_ gameModel: GKGameModel) {
+        if let board = gameModel as? BoardViewModel {
+            currentPlayer = board.currentPlayer
+        }
+    }
+    
+    func gameModelUpdates(for player: GKGameModelPlayer) -> [GKGameModelUpdate]? {
+        if let playerObject = player as? Player {
+            if isWin(for: playerObject) || isWin(for: playerObject.opponent) {
+                return nil
+            }
+            
+            var moves = [Move]()
+            
+            for view in playerObject.pawn.possibleMoves() {
+                //core logic
+                if canMovePawn(tagView: view) {
+                    moves.append(Move(type: .movePawn, pawn: Pawn(id: view)))
+                }
+            }
+            
+            return moves
+        }
+        
+        return nil
+    }
+    
+    func apply(_ gameModelUpdate: GKGameModelUpdate) {
+        if let move = gameModelUpdate as? Move {
+            //add(chip: currentPlayer.chip, in: move.column)
+            if move.type == .movePawn {
+                currentPlayer?.pawn = move.pawn ?? Pawn.starterPawn
+            } else {
+                //add wall
+                //..to be added
+            }
+            currentPlayer = currentPlayer?.opponent
+        }
+    }
+    
+    func score(for player: GKGameModelPlayer) -> Int {
+        if let playerObject = player as? Player {
+            if isWin(for: playerObject) {
+                return 1000
+            } else if isWin(for: playerObject.opponent) {
+                return -1000
+            }
+        }
+
+        return 0
+    }
+    
+  
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = BoardViewModel(navigation: navigation ?? BoardViewNavigation())
+        copy.setGameModel(self)
+        return copy
     }
     
     
