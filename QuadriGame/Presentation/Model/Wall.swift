@@ -8,10 +8,6 @@
 import Foundation
 import Combine
 
-extension Notification.Name {
-    static let newWallPosition = Notification.Name("new_wall_position")
-}
-
 enum BoardElement {
     case rightBar
     case bottomBar

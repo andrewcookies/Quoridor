@@ -14,6 +14,7 @@ final class BoardViewController: UIViewController {
 
     
     var viewModel : BoardViewModelProtocol?
+    var board :  Board!
     
     @IBOutlet weak var boardView: UIView!
     @IBOutlet weak var movePawnButton: UIButton!
@@ -42,7 +43,7 @@ final class BoardViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupObserver()
-        
+        resetBoard()
     }
 
     private func setupObserver() {
@@ -76,13 +77,17 @@ final class BoardViewController: UIViewController {
     private func setupUI(){
         createBoard()
     }
+    
+    private func resetBoard() {
+        removeWalls()
+        currentPawn = Pawn.starterPawn
+    }
 
     private func updateUI( _ state : GameState = .freeMove){
         switch state {
         case .freeMove, .reset:
             if state == .reset {
-                removeWalls()
-                currentPawn = Pawn.starterPawn
+                resetBoard()
             }
             
             infoMoveLabel.text = Localized.info_move_generic

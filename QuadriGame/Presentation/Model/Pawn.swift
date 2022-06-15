@@ -8,18 +8,24 @@
 import Foundation
 import Combine
 
-extension Notification.Name {
-    static let newPawnPosition = Notification.Name("new_pawn_position")
-}
 
 struct Pawn {
     let id : Int
     static var starterPawn : Pawn {
-        return Pawn(id: 84)
+        return Pawn(id: Constant.startCellTag)
+    }
+    
+    static var starterOpponentPawn : Pawn {
+        return Pawn(id: Constant.startOpponentCellTag)
     }
     
     var isWinPawn : Bool {
-        return (0...9).contains(self.id)
+        return (0...Constant.cellForRow - 1).contains(self.id)
+    }
+    
+    var isWinOppositePawn : Bool {
+        return (80...80+Constant.cellForRow - 1).contains(self.id)
+
     }
         
     static func ==(lhs: inout Pawn, rhs: Pawn) -> Bool {

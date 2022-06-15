@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-
+import GameplayKit
 
 
 struct BoardViewNavigation { }
@@ -30,13 +30,17 @@ protocol BoardViewModelProtocol {
     
     func makeMove(tag : Int)
     func setGameState(state : GameState)
+    func continueGame()
 }
 
 
 class BoardViewModel {
     
     private let navigation : BoardViewNavigation?
+    
     private var walls_OnBoard : [Wall]?
+    private var currentPlayer : Player?
+    
     @Published private var pawnPosition : Pawn?
     @Published private var newWall : Wall?
     @Published private var gs : GameState?
@@ -44,9 +48,14 @@ class BoardViewModel {
     
     init(navigation : BoardViewNavigation) {
         self.navigation = navigation
+        currentPlayer = Player.allPlayers[0]
         pawnPosition = Pawn.starterPawn
         walls_OnBoard = []
         gs = .freeMove
+    }
+    
+    func isWin( for player : GKGameModelPlayer) -> Bool {
+        return (player as! Player).isWin()
     }
     
     func putWall(tagView: Int) {
@@ -125,10 +134,12 @@ extension BoardViewModel : BoardViewModelProtocol {
         case .rightBar, .bottomBar:
             if gs == .pickWall {
                 putWall(tagView: tag)
+                continueGame()
             }
         case .cell:
             if gs == .movePawn {
                 movePawn(tagView: tag)
+                continueGame()
             }
         }
         
@@ -147,6 +158,16 @@ extension BoardViewModel : BoardViewModelProtocol {
         
     }
     
+    func continueGame() {
+        //manage observable logic UI
+        if isWin(for: currentPlayer ?? Player.allPlayers[0]){
+            //update something
+        } else {
+            currentPlayer = currentPlayer?.opponent
+        }
+                 
+        //update UI
+    }
     
     
 }
