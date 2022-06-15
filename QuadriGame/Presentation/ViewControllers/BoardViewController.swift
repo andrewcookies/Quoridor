@@ -14,7 +14,6 @@ final class BoardViewController: UIViewController {
 
     
     var viewModel : BoardViewModelProtocol?
-    var board :  Board!
     
     @IBOutlet weak var boardView: UIView!
     @IBOutlet weak var movePawnButton: UIButton!
@@ -23,36 +22,30 @@ final class BoardViewController: UIViewController {
     @IBOutlet weak var restartUIImage: UIImageView!
     @IBOutlet weak var infoUIImage: UIImageView!
     
-    private var pawnTag : Int { return Constant.pawnTag }
-    private var wallsOnBench : Int { return Constant.totaleWallsInGame - (viewModel?.wallsOnBoard ?? 0) }
-    private var wallsTagOnBench : [Int] = []
-    
-    private var subscribers: [AnyCancellable] = []
-    private var currentPawn = Pawn.starterPawn {
-        didSet{
-            addPawn(pawn: currentPawn)
-            if currentPawn.isWinPawn {
-                showPopup(type: .win)
-            }
-            
+    private var pawnTag : Int { return Constant.firstPlayer }
+    private var wallsCurrentPlayerOnBench : Int {
+        let player = viewModel?.player
+        if player?.isMe ?? false {
+            return Constant.totaleWallsInGame - (player?.walls.count ?? 0)
+        } else {
+            return Constant.totaleWallsInGame - (player?.opponent.walls.count ?? 0)
         }
+       
     }
-
+    private var wallsTagOnBench : [Int] = []
+    private var subscribers: [AnyCancellable] = []
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupObserver()
-        resetBoard()
+        
+        //start game
+        viewModel?.resetGame()
     }
 
     private func setupObserver() {
-        viewModel?.pawn.receive(on: DispatchQueue.main).sink(receiveValue: { [weak self] newPawn in
-            guard let self = self, let newPawn = newPawn else { return }
-            print("newPawn: \(newPawn.id)")
-            self.currentPawn = newPawn
-        }).store(in: &subscribers)
-        
         viewModel?.wall.receive(on: DispatchQueue.main).sink(receiveValue: { [weak self] newWall in
             guard let self = self else { return }
             if let wall = newWall {
@@ -80,10 +73,11 @@ final class BoardViewController: UIViewController {
     
     private func resetBoard() {
         removeWalls()
-        currentPawn = Pawn.starterPawn
     }
 
     private func updateUI( _ state : GameState = .freeMove){
+        updatePawnsPosition()
+        
         switch state {
         case .freeMove, .reset:
             if state == .reset {
@@ -96,12 +90,13 @@ final class BoardViewController: UIViewController {
             movePawnButton.isUserInteractionEnabled = true
             movePawnButton.alpha = 1
             
-            let title = String(format: Localized.pick_wall, "\(wallsOnBench)")
+            let title = String(format: Localized.pick_wall, "\(wallsCurrentPlayerOnBench)")
             pickUpWallButton.setTitle(title, for: .normal)
             pickUpWallButton.isUserInteractionEnabled = true
             pickUpWallButton.alpha = 1
             
             boardView.isUserInteractionEnabled = false
+            
             
         case .movePawn:
             infoMoveLabel.text = Localized.info_move_pawn
@@ -110,7 +105,7 @@ final class BoardViewController: UIViewController {
             movePawnButton.isUserInteractionEnabled = true
             movePawnButton.alpha = 1
             
-            let title = String(format: Localized.pick_wall, "\(wallsOnBench)")
+            let title = String(format: Localized.pick_wall, "\(wallsCurrentPlayerOnBench)")
             pickUpWallButton.setTitle(title, for: .normal)
             pickUpWallButton.isUserInteractionEnabled = false
             pickUpWallButton.alpha = 0.5
@@ -130,6 +125,15 @@ final class BoardViewController: UIViewController {
             
             boardView.isUserInteractionEnabled = true
 
+        case .opponentMove:
+            //TODO: UI
+            break
+        case .wonGame:
+            showPopup(type: .win)
+            viewModel?.resetGame()
+        case .lostGame:
+            showPopup(type: .win)//lost
+            viewModel?.resetGame()
         }
         
     }
@@ -162,7 +166,7 @@ final class BoardViewController: UIViewController {
         let wall = UIView(frame: CGRect(origin: origin ?? CGPoint.zero, size: CGSize(width: joinWallW, height: joinWallH)))
         wall.backgroundColor = .brown
         
-        let tag = pawnTag + (viewModel?.wallsOnBoard ?? 0)
+        let tag = Constant.firstWallTag + (wallsTagOnBench.count)
         wall.tag = tag
         wallsTagOnBench.append(tag)
         
@@ -170,8 +174,17 @@ final class BoardViewController: UIViewController {
         
     }
     
-    private func addPawn( pawn : Pawn){
-        let oldPawn = self.boardView.viewWithTag(pawnTag)
+    func updatePawnsPosition(){
+        let player1Pawn = viewModel?.player ?? Player.allPlayers[0]
+        let player2Pawn = viewModel?.player.opponent ?? Player.allPlayers[1]
+        updatePawnPosition(player: player1Pawn)
+        updatePawnPosition(player: player2Pawn)
+    }
+    
+    private func updatePawnPosition( player : Player){
+        let pawn = player.pawn
+        
+        let oldPawn = self.boardView.viewWithTag(player.playerId)
         oldPawn?.removeFromSuperview()
         
         let supportView = self.boardView.viewWithTag(pawn.id)
@@ -183,12 +196,10 @@ final class BoardViewController: UIViewController {
         let newPawn = UIView(frame: CGRect(origin: newOrigin, size: CGSize(width: (supportView?.frame.width ?? 0.0)*0.60, height: (supportView?.frame.height ?? 0.0)*0.60)))
         newPawn.layer.cornerRadius = newPawn.frame.size.width/2
         newPawn.clipsToBounds = true
-        newPawn.tag = pawnTag
-        newPawn.backgroundColor = .systemBrown
+        newPawn.tag = player.playerId
+        newPawn.backgroundColor = player.color
         
         self.boardView.addSubview(newPawn)
-
-        
     }
 
     private func createBoard(){
@@ -239,13 +250,13 @@ final class BoardViewController: UIViewController {
         switch type {
         case .win:
             action = { [weak self] in
-                self?.viewModel?.setGameState(state: .reset)
+                self?.viewModel?.resetGame()
             }
         case .rules, .conflictWall:
             action = nil
         case .restart:
             action = { [weak self] in
-                self?.viewModel?.setGameState(state: .reset)
+                self?.viewModel?.resetGame()
             }
         }
         popup.type = type

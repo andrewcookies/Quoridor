@@ -9,13 +9,13 @@ import Foundation
 
 final class Constant {
     
-    static let pawnTag = 1000
+    static let firstWallTag = 1000
     static let totaleWallsInGame = 10
     static let cellForRow = 9
     static let startCellTag = 84
     static let startOpponentCellTag = 84
-    static let firstPlayer = 0
-    static let secondPlayer = 1
+    static let firstPlayer = 999
+    static let secondPlayer = 998
 
     
     static let percentageHeightCellOnBoard = 0.10

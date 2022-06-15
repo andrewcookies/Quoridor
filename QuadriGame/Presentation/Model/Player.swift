@@ -14,8 +14,13 @@ class Player: NSObject, GKGameModelPlayer {
     var name: String
     var playerId: Int
     var pawn : Pawn
-    static var allPlayers = [Player(color : .red, name : "You", id : Constant.firstPlayer), Player(color: .black, name: "CPU", id: Constant.secondPlayer)]
+    var walls : [Wall]
     
+    static var allPlayers = [Player(color : .red, name : "You", id : Constant.firstPlayer), Player(color: .blue, name: "CPU", id: Constant.secondPlayer)]
+    
+    var isMe : Bool {
+        return playerId == Constant.firstPlayer
+    }
     
     var opponent: Player {
         if playerId == Constant.firstPlayer {
@@ -34,7 +39,7 @@ class Player: NSObject, GKGameModelPlayer {
         } else {
             pawn = Pawn.starterOpponentPawn
         }
-        
+        walls = []
         super.init()
     }
 

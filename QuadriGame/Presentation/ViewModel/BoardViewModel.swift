@@ -17,50 +17,49 @@ enum GameState {
     case movePawn
     case pickWall
     case reset
+    case opponentMove
+    case wonGame
+    case lostGame
 }
-
-//TODO: 1 - remove all walls, 2 - reset board
     
 
 protocol BoardViewModelProtocol {
-    var pawn : Published<Pawn?>.Publisher { get }
     var wall : Published<Wall?>.Publisher { get }
     var gameState : Published<GameState?>.Publisher { get }
-    var wallsOnBoard : Int { get }
+    var player : Player { get }
     
     func makeMove(tag : Int)
     func setGameState(state : GameState)
     func continueGame()
+    func resetGame()
 }
 
 
 class BoardViewModel: NSObject {
     
     private let navigation : BoardViewNavigation?
+    private var walls_OnBoard : [Wall] {
+        return player.walls + player.opponent.walls
+    }
     
-    private var walls_OnBoard : [Wall]?
-    private var currentPlayer : Player?
-    
-    @Published private var pawnPosition : Pawn?
     @Published private var newWall : Wall?
     @Published private var gs : GameState?
+    
+    var currentPlayer : Player?
 
     
     init(navigation : BoardViewNavigation) {
         self.navigation = navigation
-        currentPlayer = Player.allPlayers[0]
-        pawnPosition = Pawn.starterPawn
-        walls_OnBoard = []
-        gs = .freeMove
     }
+
     
     func isWin( for player : GKGameModelPlayer) -> Bool {
         return (player as! Player).isWin()
     }
     
     func canPutWall(wall : Wall) -> Bool {
-        guard let walls = walls_OnBoard else { return false }
-        if walls.contains(where: { $0.conflicts(wall: wall) }).not && wallsOnBoard < Constant.totaleWallsInGame {
+        let walls = walls_OnBoard
+        if walls.contains(where: { $0.conflicts(wall: wall) }).not && player.walls.count < Constant.totaleWallsInGame {
             return true
         } else {
             return false
@@ -71,15 +70,16 @@ class BoardViewModel: NSObject {
         gs = .freeMove
         let candidateWall = Wall(firstWall: tagView, secondWall: tagView.isVerticalWall ? (tagView-10) : (tagView+1))
         if canPutWall(wall: candidateWall) {
+            player.walls.append(candidateWall)
             newWall = candidateWall
-            walls_OnBoard?.append(candidateWall)
         } else {
             newWall = nil
         }
     }
     
     func canMovePawn( tagView: Int ) -> Bool {
-        guard let currentId = pawnPosition?.id, let walls = walls_OnBoard else { return false }
+        let walls = walls_OnBoard
+        let currentId = player.pawn.id
         if currentId == tagView {
             // do nothing in this moment, the pawn does not move
             return false
@@ -119,26 +119,24 @@ class BoardViewModel: NSObject {
     
     func movePawn(tagView: Int) {
         if canMovePawn(tagView: tagView){
-            pawnPosition = Pawn(id: tagView)
+            player.pawn = Pawn(id: tagView)
             gs = .freeMove
         }
     }
 }
 
 extension BoardViewModel : BoardViewModelProtocol {
+    
+    var player: Player {
+        return currentPlayer ?? Player.allPlayers[0]
+    }
+    
 
     var gameState: Published<GameState?>.Publisher {
         $gs
     }
     
-    var wallsOnBoard: Int {
-        return walls_OnBoard?.count ?? 0
-    }
-    
-    var pawn: Published<Pawn?>.Publisher {
-        $pawnPosition
-    }
-    
+
     var wall: Published<Wall?>.Publisher {
         $newWall
     }
@@ -160,6 +158,11 @@ extension BoardViewModel : BoardViewModelProtocol {
         }
         
     }
+    
+    func resetGame(){
+        currentPlayer = Player.allPlayers[0]
+        gs = .reset
+    }
 
     func setGameState(state: GameState) {
         if state == gs {
@@ -167,22 +170,17 @@ extension BoardViewModel : BoardViewModelProtocol {
         } else {
             gs = state
         }
-        
-        if state == .reset {
-            walls_OnBoard?.removeAll()
-        }
-        
     }
     
     func continueGame() {
         //manage observable logic UI
         if isWin(for: currentPlayer ?? Player.allPlayers[0]){
-            //update something
+            gs = (currentPlayer?.isMe ?? true) ? .wonGame : .lostGame
         } else {
             currentPlayer = currentPlayer?.opponent
+            gs = (currentPlayer?.isMe ?? true) ? .freeMove : .opponentMove
         }
                  
-        //update UI
     }
     
     
@@ -215,9 +213,9 @@ extension BoardViewModel : GKGameModel {
             var moves = [Move]()
             
             for view in playerObject.pawn.possibleMoves() {
-                //core logic
+                //core IA logic
                 if canMovePawn(tagView: view) {
-                    moves.append(Move(type: .movePawn, pawn: Pawn(id: view)))
+                    moves.append(Move(value: 0, type: .movePawn, pawn: Pawn(id: view)))
                 }
             }
             
