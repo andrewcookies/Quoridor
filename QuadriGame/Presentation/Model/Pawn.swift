@@ -19,13 +19,20 @@ struct Pawn {
         return Pawn(id: Constant.startOpponentCellTag)
     }
     
+    static var winPawnViews : [Int] {
+        return Array((0...Constant.cellForRow - 1))
+    }
+    
+    static var winOppositePawnViews : [Int] {
+        return Array((80...80+Constant.cellForRow - 1))
+    }
+    
     var isWinPawn : Bool {
-        return (0...Constant.cellForRow - 1).contains(self.id)
+        return Pawn.winPawnViews.contains(self.id)
     }
     
     var isWinOppositePawn : Bool {
-        return (80...80+Constant.cellForRow - 1).contains(self.id)
-
+        return Pawn.winOppositePawnViews.contains(self.id)
     }
     
     func possibleMoves() -> [Int] {

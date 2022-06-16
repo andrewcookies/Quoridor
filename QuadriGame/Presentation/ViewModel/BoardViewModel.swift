@@ -56,7 +56,7 @@ class BoardViewModel: NSObject {
 
     func initStrategist(){
         strategist = GKMinmaxStrategist()
-        strategist.maxLookAheadDepth = 5
+        strategist.maxLookAheadDepth = 4
         strategist.randomSource = GKARC4RandomSource()
         strategist.gameModel = self
     }
@@ -84,9 +84,9 @@ class BoardViewModel: NSObject {
         }
     }
     
-    func canMovePawn( tagView: Int ) -> Bool {
+    func canMovePawn( tagView: Int, currentPawn : Int? = nil ) -> Bool {
         let walls = walls_OnBoard
-        let currentId = player.pawn.id
+        let currentId = currentPawn ?? player.pawn.id
         if currentId == tagView {
             // do nothing in this moment, the pawn does not move
             return false
@@ -126,6 +126,7 @@ class BoardViewModel: NSObject {
     
     func movePawn(tagView: Int) {
         if canMovePawn(tagView: tagView){
+            print("movePawn: player \(player.playerId) - tagView \(tagView)")
             player.pawn = Pawn(id: tagView)
         }
     }
@@ -220,6 +221,39 @@ extension BoardViewModel : BoardViewModelProtocol {
          return nil
     }
     
+    //custom deep search (crashes)
+    
+    func getBestMoveAI()  -> Int?{
+        let possibleMoves = currentPlayer?.possbilePawnMoves() ?? []
+        var result = Array(repeating: (currentPlayer?.pawn,10000), count: possibleMoves.count)
+        
+        for (i, moves) in possibleMoves.enumerated() {
+            result[i] = getBestPath(pawn : Pawn(id: moves), deep : 0 )
+        }
+        result = result.sorted(by: { $0.1 < $1.1 })
+        return result.first?.0?.id
+        
+        
+    }
+    
+    func getBestPath(pawn : Pawn, deep : Int ) -> (Pawn,Int) {
+        if (80...80+Constant.cellForRow - 1).contains(pawn.id) {
+            return (pawn,deep)
+        } else {
+            var result = [(Pawn,Int)]()
+            let possibleMoves = pawn.possibleOpponentMoves()
+            for move in possibleMoves {
+                if canMovePawn(tagView: move, currentPawn: pawn.id){
+                    let res = getBestPath(pawn: Pawn(id: move), deep: deep + 1)
+                    result.append(res)
+                }
+            }
+            
+            result = result.sorted(by: { $0.1 < $1.1 })
+            return result.first ?? (pawn,deep)
+        }
+    }
+    
     func moveAIPawn( tag : Int) {
         movePawn(tagView: tag)
         continueGame()
@@ -270,13 +304,14 @@ extension BoardViewModel : GKGameModel {
         if let move = gameModelUpdate as? Move {
             //add(chip: currentPlayer.chip, in: move.column)
             if move.type == .movePawn {
+                print("move simulated: \(move.pawn?.id ?? 0)")
                 currentPlayer?.pawn = move.pawn ?? Pawn.starterPawn
             } else {
                 //add wall
                 //..to be added
             }
          //
-        //    currentPlayer = currentPlayer?.opponent
+         //  currentPlayer = currentPlayer?.opponent
         }
     }
     
