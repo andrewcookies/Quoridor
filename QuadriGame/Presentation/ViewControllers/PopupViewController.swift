@@ -9,10 +9,11 @@ import Foundation
 import UIKit
 
 enum PopupType {
-    case win
+    case won
     case rules
     case restart
     case conflictWall
+    case lost
 }
 
 class PopupViewController : UIViewController {
@@ -36,10 +37,10 @@ class PopupViewController : UIViewController {
         var button : String?
         
         switch type {
-        case .win:
-            title = Localized.win_title
-            content = Localized.win_content
-            button = Localized.win_button
+        case .won:
+            title = Localized.won_title
+            content = Localized.won_content
+            button = Localized.won_button
         case .rules:
             title = Localized.rules_title
             content = Localized.rules_content
@@ -52,6 +53,10 @@ class PopupViewController : UIViewController {
             title = Localized.conflict_wall_title
             content = Localized.conflict_wall_content
             button = Localized.conflict_wall_button
+        case .lost:
+            title = Localized.lost_title
+            content = Localized.lost_content
+            button = Localized.lost_button
         }
     
         titleLabel.text = title ?? ""

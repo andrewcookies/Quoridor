@@ -42,7 +42,7 @@ final class BoardViewController: UIViewController {
         setupObserver()
         
         //start game
-        viewModel?.resetGame()
+        viewModel?.startGame()
     }
 
     private func setupObserver() {
@@ -126,14 +126,22 @@ final class BoardViewController: UIViewController {
             boardView.isUserInteractionEnabled = true
 
         case .opponentMove:
-            //TODO: UI
-            break
+            infoMoveLabel.text = Localized.info_opponent_move
+            boardView.isUserInteractionEnabled = false
+            
+            movePawnButton.isUserInteractionEnabled = false
+            movePawnButton.alpha = 0.5
+            
+            pickUpWallButton.isUserInteractionEnabled = false
+            pickUpWallButton.alpha = 0.5
+            
+            viewModel?.makeAIMove()
+            
         case .wonGame:
-            showPopup(type: .win)
-            viewModel?.resetGame()
+            showPopup(type: .won)
+            
         case .lostGame:
-            showPopup(type: .win)//lost
-            viewModel?.resetGame()
+            showPopup(type: .lost)
         }
         
     }
@@ -248,16 +256,12 @@ final class BoardViewController: UIViewController {
         var action : (()->())?
         
         switch type {
-        case .win:
+        case .won, .lost, .restart:
             action = { [weak self] in
                 self?.viewModel?.resetGame()
             }
-        case .rules, .conflictWall:
+        default:
             action = nil
-        case .restart:
-            action = { [weak self] in
-                self?.viewModel?.resetGame()
-            }
         }
         popup.type = type
         popup.action = action

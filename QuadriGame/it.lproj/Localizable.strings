@@ -13,14 +13,15 @@
 "board.cancel_move" = "Annulla";
 "board.info_move_pawn" = "Premi una cella per movere il pedone";
 "board.info_put_wall" = "Premi gli spazi tra le celle per posizionare il muro";
+"board.info_opponent_move" = "Attendi la mossa dell'avversario...";
 
 //Popup
 "popup.win_title" = "Congratulazioni";
 "popup.win_content" = "Hai vinto la partita";
 "popup.win_button" = "Ricomincia";
-"popup.lose_title" = "Oh No!";
-"popup.lose_content" = "Hai perso la partita";
-"popup.lose_button" = "Ricomincia";
+"popup.lost_title" = "Oh No!";
+"popup.lost_content" = "Hai perso la partita";
+"popup.lost_button" = "Ricomincia";
 "popup.restart_title" = "Ricomincia";
 "popup.restart_content" = "Vuoi ricominciare la partita?";
 "popup.restart_button" = "Si";

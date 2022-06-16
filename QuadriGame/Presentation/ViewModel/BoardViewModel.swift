@@ -30,8 +30,9 @@ protocol BoardViewModelProtocol {
     
     func makeMove(tag : Int)
     func setGameState(state : GameState)
-    func continueGame()
+    func startGame()
     func resetGame()
+    func makeAIMove()
 }
 
 
@@ -41,6 +42,7 @@ class BoardViewModel: NSObject {
     private var walls_OnBoard : [Wall] {
         return player.walls + player.opponent.walls
     }
+    private var strategist: GKMinmaxStrategist!
     
     @Published private var newWall : Wall?
     @Published private var gs : GameState?
@@ -52,6 +54,12 @@ class BoardViewModel: NSObject {
         self.navigation = navigation
     }
 
+    func initStrategist(){
+        strategist = GKMinmaxStrategist()
+        strategist.maxLookAheadDepth = 7
+        strategist.randomSource = GKARC4RandomSource()
+        strategist.gameModel = self
+    }
     
     func isWin( for player : GKGameModelPlayer) -> Bool {
         return (player as! Player).isWin()
@@ -123,6 +131,17 @@ class BoardViewModel: NSObject {
             gs = .freeMove
         }
     }
+    
+    private func continueGame() {
+        //manage observable logic UI
+        if isWin(for: currentPlayer ?? Player.allPlayers[0]){
+            gs = (currentPlayer?.isMe ?? true) ? .wonGame : .lostGame
+        } else {
+            currentPlayer = currentPlayer?.opponent
+            gs = (currentPlayer?.isMe ?? true) ? .freeMove : .opponentMove
+        }
+                 
+    }
 }
 
 extension BoardViewModel : BoardViewModelProtocol {
@@ -159,6 +178,11 @@ extension BoardViewModel : BoardViewModelProtocol {
         
     }
     
+    func startGame() {
+        initStrategist()
+        resetGame()
+    }
+    
     func resetGame(){
         currentPlayer = Player.allPlayers[0]
         gs = .reset
@@ -172,18 +196,34 @@ extension BoardViewModel : BoardViewModelProtocol {
         }
     }
     
-    func continueGame() {
-        //manage observable logic UI
-        if isWin(for: currentPlayer ?? Player.allPlayers[0]){
-            gs = (currentPlayer?.isMe ?? true) ? .wonGame : .lostGame
-        } else {
-            currentPlayer = currentPlayer?.opponent
-            gs = (currentPlayer?.isMe ?? true) ? .freeMove : .opponentMove
+    //MARK: AI
+    func makeAIMove() {
+        //loading?
+        DispatchQueue.global().async { [unowned self] in
+            let strategistTime = CFAbsoluteTimeGetCurrent()
+            guard let tagView = self.getBestMove() else { return }
+            let delta = CFAbsoluteTimeGetCurrent() - strategistTime
+            
+            let aiTimeCeiling = 1.0
+            let delay = aiTimeCeiling - delta
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                self.moveAIPawn(tag: tagView)
+            }
         }
-                 
+    }
+
+    func getBestMove() -> Int? {
+        if let aiMove = strategist.bestMove(for: player ) as? Move {
+            return aiMove.pawn?.id
+         }
+         return nil
     }
     
-    
+    func moveAIPawn( tag : Int) {
+        movePawn(tagView: tag)
+        continueGame()
+    }
 }
 
 //MARK: IA

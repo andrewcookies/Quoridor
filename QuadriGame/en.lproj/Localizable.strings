@@ -13,14 +13,15 @@
 "board.cancel_move" = "Cancel";
 "board.info_move_pawn" = "Tap cell to move your pawn";
 "board.info_put_wall" = "Tap space between cells to put a wall";
+"board.info_opponent_move" = "Wait opponent move...";
 
 //Popup
-"popup.win_title" = "Congratulations";
-"popup.win_content" = "You won the game";
-"popup.win_button" = "Restart";
-"popup.lose_title" = "Oh No!";
-"popup.lose_content" = "You lost the game";
-"popup.lose_button" = "Restart";
+"popup.won_title" = "Congratulations";
+"popup.won_content" = "You won the game";
+"popup.won_button" = "Restart";
+"popup.lost_title" = "Oh No!";
+"popup.lost_content" = "You lost the game";
+"popup.lost_button" = "Restart";
 "popup.restart_title" = "Restart";
 "popup.restart_content" = "Do you want to restart the game?";
 "popup.restart_button" = "Yes";
