@@ -76,13 +76,13 @@ final class BoardViewController: UIViewController {
     }
 
     private func updateUI( _ state : GameState = .freeMove){
-        updatePawnsPosition()
         
         switch state {
         case .freeMove, .reset:
             if state == .reset {
                 resetBoard()
             }
+            updatePawnsPosition()
             
             infoMoveLabel.text = Localized.info_move_generic
             
@@ -126,6 +126,8 @@ final class BoardViewController: UIViewController {
             boardView.isUserInteractionEnabled = true
 
         case .opponentMove:
+            updatePawnsPosition()
+            
             infoMoveLabel.text = Localized.info_opponent_move
             boardView.isUserInteractionEnabled = false
             
@@ -138,9 +140,11 @@ final class BoardViewController: UIViewController {
             viewModel?.makeAIMove()
             
         case .wonGame:
+            updatePawnsPosition()
             showPopup(type: .won)
             
         case .lostGame:
+            updatePawnsPosition()
             showPopup(type: .lost)
         }
         
@@ -185,6 +189,9 @@ final class BoardViewController: UIViewController {
     func updatePawnsPosition(){
         let player1Pawn = viewModel?.player ?? Player.allPlayers[0]
         let player2Pawn = viewModel?.player.opponent ?? Player.allPlayers[1]
+        
+        print("updatePawnsPosition:\n currentPlayer = \(player1Pawn.playerId) - \(player1Pawn.pawn.id)\n oppositePlayer = \(player2Pawn.playerId) - \(player2Pawn.pawn.id)")
+
         updatePawnPosition(player: player1Pawn)
         updatePawnPosition(player: player2Pawn)
     }

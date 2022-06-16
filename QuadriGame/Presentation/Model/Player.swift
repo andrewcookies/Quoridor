@@ -16,7 +16,9 @@ class Player: NSObject, GKGameModelPlayer {
     var pawn : Pawn
     var walls : [Wall]
     
-    static var allPlayers = [Player(color : .red, name : "You", id : Constant.firstPlayer), Player(color: .blue, name: "CPU", id: Constant.secondPlayer)]
+    static var allPlayers = [Player(color : .red, name : "You", id : Constant.firstPlayer),
+                             Player(color: .blue, name: "CPU", id: Constant.secondPlayer)]
+    
     
     var isMe : Bool {
         return playerId == Constant.firstPlayer
@@ -48,6 +50,23 @@ class Player: NSObject, GKGameModelPlayer {
             return pawn.isWinPawn
         } else {
             return pawn.isWinOppositePawn
+        }
+    }
+    
+    func restart(){
+        if playerId == Constant.firstPlayer {
+            pawn = Pawn.starterPawn
+        } else {
+            pawn = Pawn.starterOpponentPawn
+        }
+    }
+    
+    
+    func possbilePawnMoves()->[Int] {
+        if playerId == Constant.firstPlayer {
+            return pawn.possibleMoves()
+        } else {
+            return pawn.possibleOpponentMoves()
         }
     }
 }

@@ -57,6 +57,40 @@ struct Pawn {
         return moves
     }
     
+    func possibleOpponentMoves() -> [Int] {
+        var moves = [Int]()
+        
+        let row = Int(id/10) //0,10,20,30
+        let column = id%10 //0,1,2,3,4
+        
+        //toward opposite side
+        if  row < 80 {
+            moves.append(id + 10)
+        }
+        
+        //its rigth
+        if  column > 0 {
+            moves.append(id - 1)
+        }
+        
+        //toward its side
+        if  row > 0 {
+            moves.append(id - 10)
+        }
+        
+        //its left
+        if column < Constant.cellForRow - 1 {
+            moves.append(id + 1)
+        }
+        
+
+        
+
+        
+        return moves
+    }
+    
+    
         
     static func ==(lhs: inout Pawn, rhs: Pawn) -> Bool {
         return lhs.id == rhs.id

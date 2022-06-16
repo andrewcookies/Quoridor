@@ -56,7 +56,7 @@ class BoardViewModel: NSObject {
 
     func initStrategist(){
         strategist = GKMinmaxStrategist()
-        strategist.maxLookAheadDepth = 7
+        strategist.maxLookAheadDepth = 5
         strategist.randomSource = GKARC4RandomSource()
         strategist.gameModel = self
     }
@@ -75,7 +75,6 @@ class BoardViewModel: NSObject {
     }
     
     func putWall(tagView: Int) {
-        gs = .freeMove
         let candidateWall = Wall(firstWall: tagView, secondWall: tagView.isVerticalWall ? (tagView-10) : (tagView+1))
         if canPutWall(wall: candidateWall) {
             player.walls.append(candidateWall)
@@ -128,7 +127,6 @@ class BoardViewModel: NSObject {
     func movePawn(tagView: Int) {
         if canMovePawn(tagView: tagView){
             player.pawn = Pawn(id: tagView)
-            gs = .freeMove
         }
     }
     
@@ -180,11 +178,13 @@ extension BoardViewModel : BoardViewModelProtocol {
     
     func startGame() {
         initStrategist()
-        resetGame()
+        currentPlayer = Player.allPlayers[0]
+        gs = .freeMove
     }
     
     func resetGame(){
-        currentPlayer = Player.allPlayers[0]
+        currentPlayer?.restart()
+        currentPlayer?.opponent.restart()
         gs = .reset
     }
 
@@ -251,8 +251,9 @@ extension BoardViewModel : GKGameModel {
             }
             
             var moves = [Move]()
+            let possiblePawnMoves = playerObject.possbilePawnMoves()
             
-            for view in playerObject.pawn.possibleMoves() {
+            for view in possiblePawnMoves {
                 //core IA logic
                 if canMovePawn(tagView: view) {
                     moves.append(Move(value: 0, type: .movePawn, pawn: Pawn(id: view)))
@@ -274,7 +275,8 @@ extension BoardViewModel : GKGameModel {
                 //add wall
                 //..to be added
             }
-            currentPlayer = currentPlayer?.opponent
+         //
+        //    currentPlayer = currentPlayer?.opponent
         }
     }
     

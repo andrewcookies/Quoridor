@@ -13,7 +13,7 @@ final class Constant {
     static let totaleWallsInGame = 10
     static let cellForRow = 9
     static let startCellTag = 84
-    static let startOpponentCellTag = 84
+    static let startOpponentCellTag = 4
     static let firstPlayer = 999
     static let secondPlayer = 998
 

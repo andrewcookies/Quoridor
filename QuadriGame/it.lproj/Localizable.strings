@@ -16,9 +16,9 @@
 "board.info_opponent_move" = "Attendi la mossa dell'avversario...";
 
 //Popup
-"popup.win_title" = "Congratulazioni";
-"popup.win_content" = "Hai vinto la partita";
-"popup.win_button" = "Ricomincia";
+"popup.won_title" = "Congratulazioni";
+"popup.won_content" = "Hai vinto la partita";
+"popup.won_button" = "Ricomincia";
 "popup.lost_title" = "Oh No!";
 "popup.lost_content" = "Hai perso la partita";
 "popup.lost_button" = "Ricomincia";
