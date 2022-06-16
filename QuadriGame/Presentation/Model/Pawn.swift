@@ -75,6 +75,11 @@ struct Pawn {
             moves.append(id + 10)
         }
         
+        //its left
+        if column < Constant.cellForRow - 1 {
+            moves.append(id + 1)
+        }
+        
         //its rigth
         if  column > 0 {
             moves.append(id - 1)
@@ -85,10 +90,7 @@ struct Pawn {
             moves.append(id - 10)
         }
         
-        //its left
-        if column < Constant.cellForRow - 1 {
-            moves.append(id + 1)
-        }
+
         
 
         
