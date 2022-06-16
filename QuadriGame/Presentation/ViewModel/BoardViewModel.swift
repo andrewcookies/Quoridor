@@ -202,7 +202,7 @@ extension BoardViewModel : BoardViewModelProtocol {
         //loading?
         DispatchQueue.global().async { [unowned self] in
             let strategistTime = CFAbsoluteTimeGetCurrent()
-            guard let tagView = self.getBestMove() else { return }
+            guard let tagView = self.getBestMoveAI() else { return }
             let delta = CFAbsoluteTimeGetCurrent() - strategistTime
             
             let aiTimeCeiling = 1.0
@@ -221,14 +221,17 @@ extension BoardViewModel : BoardViewModelProtocol {
          return nil
     }
     
-    //custom deep search (crashes)
+    //custom deep search ( deep > 7 too long )
     
     func getBestMoveAI()  -> Int?{
         let possibleMoves = currentPlayer?.possbilePawnMoves() ?? []
         var result = Array(repeating: (currentPlayer?.pawn,10000), count: possibleMoves.count)
         
         for (i, moves) in possibleMoves.enumerated() {
-            result[i] = getBestPath(pawn : Pawn(id: moves), deep : 0 )
+            if canMovePawn(tagView: moves, currentPawn: currentPlayer?.pawn.id) {
+                let min = getBestPath(pawn : Pawn(id: moves), deep : 0 )
+                result[i] = (Pawn(id: moves),min)
+            }
         }
         result = result.sorted(by: { $0.1 < $1.1 })
         return result.first?.0?.id
@@ -236,11 +239,11 @@ extension BoardViewModel : BoardViewModelProtocol {
         
     }
     
-    func getBestPath(pawn : Pawn, deep : Int ) -> (Pawn,Int) {
-        if (80...80+Constant.cellForRow - 1).contains(pawn.id) {
-            return (pawn,deep)
+    func getBestPath(pawn : Pawn, deep : Int ) -> Int {
+        if Pawn.winOppositePawnViews.contains(pawn.id) || deep == 7 {
+            return deep
         } else {
-            var result = [(Pawn,Int)]()
+            var result = [Int]()
             let possibleMoves = pawn.possibleOpponentMoves()
             for move in possibleMoves {
                 if canMovePawn(tagView: move, currentPawn: pawn.id){
@@ -249,8 +252,7 @@ extension BoardViewModel : BoardViewModelProtocol {
                 }
             }
             
-            result = result.sorted(by: { $0.1 < $1.1 })
-            return result.first ?? (pawn,deep)
+            return result.min() ?? deep
         }
     }
     
@@ -260,7 +262,7 @@ extension BoardViewModel : BoardViewModelProtocol {
     }
 }
 
-//MARK: IA
+//MARK: IA..get how it works....
 
 extension BoardViewModel : GKGameModel {
     

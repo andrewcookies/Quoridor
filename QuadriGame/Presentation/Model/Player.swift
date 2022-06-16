@@ -59,6 +59,7 @@ class Player: NSObject, GKGameModelPlayer {
         } else {
             pawn = Pawn.starterOpponentPawn
         }
+        walls = []
     }
     
     
