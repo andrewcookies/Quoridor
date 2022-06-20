@@ -256,6 +256,8 @@ final class BoardViewController: UIViewController {
                 y += 1
             }
         }
+        
+        boardView.tag = Constant.boardTag
     }
     
     private func showPopup(type : PopupType){

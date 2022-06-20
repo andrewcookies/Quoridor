@@ -14,15 +14,14 @@ enum MoveType {
 }
 
 class Move: NSObject, GKGameModelUpdate {
-    var value: Int
+    var value: Int = 0
     
     var pawn : Pawn?
     var wall : Wall?
     var type : MoveType?
     
     
-    init(value : Int, type: MoveType, pawn : Pawn? = nil, wall : Wall? = nil) {
-        self.value = value
+    init(type: MoveType, pawn : Pawn? = nil, wall : Wall? = nil) {
         self.type = type
         self.pawn = pawn
         self.wall = wall

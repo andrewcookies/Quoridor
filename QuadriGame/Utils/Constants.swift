@@ -9,6 +9,7 @@ import Foundation
 
 final class Constant {
     
+    static let boardTag = -1
     static let firstWallTag = 1000
     static let totaleWallsInGame = 10
     static let cellForRow = 9

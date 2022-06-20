@@ -56,7 +56,7 @@ class BoardViewModel: NSObject {
 
     func initStrategist(){
         strategist = GKMinmaxStrategist()
-        strategist.maxLookAheadDepth = 4
+        strategist.maxLookAheadDepth = 10
         strategist.randomSource = GKARC4RandomSource()
         strategist.gameModel = self
     }
@@ -125,8 +125,9 @@ class BoardViewModel: NSObject {
     }
     
     func movePawn(tagView: Int) {
+        print("movePawn: player \(player.playerId) - currentPosition \(player.pawn.id) - tagView \(tagView)?")
         if canMovePawn(tagView: tagView){
-            print("movePawn: player \(player.playerId) - tagView \(tagView)")
+            print("movedPawn: \(tagView)")
             player.pawn = Pawn(id: tagView)
         }
     }
@@ -201,14 +202,27 @@ extension BoardViewModel : BoardViewModelProtocol {
     func makeAIMove() {
         //loading?
         DispatchQueue.global().async { [unowned self] in
+            
+            let startPlayerPawn = currentPlayer?.opponent.pawn ?? Pawn.starterOpponentPawn
+            let starterOppositePawn = currentPlayer?.pawn ?? Pawn.starterPawn
+            let starterPlayerWalls = currentPlayer?.opponent.walls ?? []
+            let starterOppositeWalls = currentPlayer?.walls ?? []
+            
             let strategistTime = CFAbsoluteTimeGetCurrent()
-            guard let tagView = self.getBestMoveAI() else { return }
+            guard let tagView = self.getBestMove() else { return }
             let delta = CFAbsoluteTimeGetCurrent() - strategistTime
             
             let aiTimeCeiling = 1.0
             let delay = aiTimeCeiling - delta
             
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                //found the best move, reset the start positions before oooponent's simulation ...
+                self.currentPlayer?.pawn = starterOppositePawn
+                self.currentPlayer?.opponent.pawn = startPlayerPawn
+                self.currentPlayer?.walls = starterOppositeWalls
+                self.currentPlayer?.opponent.walls = starterPlayerWalls
+                
+                //then....move pawn
                 self.moveAIPawn(tag: tagView)
             }
         }
@@ -235,8 +249,6 @@ extension BoardViewModel : BoardViewModelProtocol {
         }
         result = result.sorted(by: { $0.1 < $1.1 })
         return result.first?.0?.id
-        
-        
     }
     
     func getBestPath(pawn : Pawn, deep : Int ) -> Int {
@@ -291,8 +303,8 @@ extension BoardViewModel : GKGameModel {
             
             for view in possiblePawnMoves {
                 //core IA logic
-                if canMovePawn(tagView: view) {
-                    moves.append(Move(value: 0, type: .movePawn, pawn: Pawn(id: view)))
+                if canMovePawn(tagView: view, currentPawn: playerObject.pawn.id) {
+                    moves.append(Move(type: .movePawn, pawn: Pawn(id: view)))
                 }
             }
             
@@ -306,22 +318,23 @@ extension BoardViewModel : GKGameModel {
         if let move = gameModelUpdate as? Move {
             //add(chip: currentPlayer.chip, in: move.column)
             if move.type == .movePawn {
-                print("move simulated: \(move.pawn?.id ?? 0)")
                 currentPlayer?.pawn = move.pawn ?? Pawn.starterPawn
             } else {
                 //add wall
                 //..to be added
             }
          //
-         //  currentPlayer = currentPlayer?.opponent
+         currentPlayer = currentPlayer?.opponent
         }
     }
     
     func score(for player: GKGameModelPlayer) -> Int {
         if let playerObject = player as? Player {
             if isWin(for: playerObject) {
+                print("isWin for \(playerObject.playerId) - \(playerObject.pawn.id)")
                 return 1000
             } else if isWin(for: playerObject.opponent) {
+                print("isWin for \(playerObject.playerId) - \(playerObject.pawn.id)")
                 return -1000
             }
         }
