@@ -54,7 +54,7 @@ class BoardViewModel: NSObject {
         self.navigation = navigation
     }
 
-    func initStrategist(){
+    private func initStrategist(){
         strategist = GKMinmaxStrategist()
         strategist.maxLookAheadDepth = 10
         strategist.randomSource = GKARC4RandomSource()
@@ -65,16 +65,91 @@ class BoardViewModel: NSObject {
         return (player as! Player).isWin()
     }
     
-    func canPutWall(wall : Wall) -> Bool {
+    
+    private func findRing( analyzedWalls : [Wall], nextWall : Wall) -> Bool {
+        
+        if analyzedWalls.count > 1 {
+            let startWall = analyzedWalls.first
+            if startWall == nextWall {
+                return true
+            }
+            
+            if walls_OnBoard.contains(nextWall).not {
+                return false
+            }
+        }
+        
+        let lastWall = analyzedWalls.last
+
+        if let w = nextWall.nextWall(), lastWall != w  {
+            var walls = analyzedWalls
+            walls.append(nextWall)
+            if findRing(analyzedWalls: walls, nextWall: w) {
+                return true
+            }
+        }
+        
+        if let w = nextWall.previousWall(), lastWall != w  {
+            var walls = analyzedWalls
+            walls.append(nextWall)
+            if findRing(analyzedWalls: walls, nextWall: w) {
+                return true
+            }
+        }
+        
+        if let w = nextWall.northEastWall(), lastWall != w  {
+            var walls = analyzedWalls
+            walls.append(nextWall)
+            if findRing(analyzedWalls: walls, nextWall: w) {
+                return true
+            }
+        }
+            
+        if let w = nextWall.northWestWall(), lastWall != w {
+            var walls = analyzedWalls
+            walls.append(nextWall)
+            if findRing(analyzedWalls: walls, nextWall: w) {
+                return true
+            }
+        }
+           
+        if let w = nextWall.southWestWall(), lastWall != w {
+            var walls = analyzedWalls
+            walls.append(nextWall)
+            if findRing(analyzedWalls: walls, nextWall: w) {
+                return true
+            }
+        }
+           
+        
+        if let w = nextWall.southEastWall(), lastWall != w {
+            var walls = analyzedWalls
+            walls.append(nextWall)
+            if findRing(analyzedWalls: walls, nextWall: w) {
+                return true
+            }
+        }
+        
+        return false
+        
+    }
+    
+    
+    private func haveRing(wall : Wall) -> Bool {
+        return findRing(analyzedWalls: [wall], nextWall: wall)
+    }
+    
+    private func canPutWall(wall : Wall) -> Bool {
         let walls = walls_OnBoard
-        if walls.contains(where: { $0.conflicts(wall: wall) }).not && player.walls.count < Constant.totaleWallsInGame {
-            return true
+        if walls.contains(where: { $0.conflicts(wall: wall) }).not
+            && player.walls.count < Constant.totaleWallsInGame {
+            return haveRing(wall: wall).not
         } else {
             return false
         }
     }
     
-    func putWall(tagView: Int) {
+    private func putWall(tagView: Int) {
         let candidateWall = Wall(firstWall: tagView, secondWall: tagView.isVerticalWall ? (tagView-10) : (tagView+1))
         if canPutWall(wall: candidateWall) {
             player.walls.append(candidateWall)
@@ -84,7 +159,7 @@ class BoardViewModel: NSObject {
         }
     }
     
-    func canMovePawn( tagView: Int, currentPawn : Int? = nil ) -> Bool {
+    private func canMovePawn( tagView: Int, currentPawn : Int? = nil ) -> Bool {
         let walls = walls_OnBoard
         let currentId = currentPawn ?? player.pawn.id
         if currentId == tagView {
@@ -124,7 +199,7 @@ class BoardViewModel: NSObject {
         }
     }
     
-    func movePawn(tagView: Int) {
+    private func movePawn(tagView: Int) {
         print("movePawn: player \(player.playerId) - currentPosition \(player.pawn.id) - tagView \(tagView)?")
         if canMovePawn(tagView: tagView){
             print("movedPawn: \(tagView)")
@@ -331,10 +406,8 @@ extension BoardViewModel : GKGameModel {
     func score(for player: GKGameModelPlayer) -> Int {
         if let playerObject = player as? Player {
             if isWin(for: playerObject) {
-                print("isWin for \(playerObject.playerId) - \(playerObject.pawn.id)")
                 return 1000
             } else if isWin(for: playerObject.opponent) {
-                print("isWin for \(playerObject.playerId) - \(playerObject.pawn.id)")
                 return -1000
             }
         }

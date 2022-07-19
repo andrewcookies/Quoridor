@@ -11,27 +11,19 @@ import Foundation
 extension Int {
     
     var isVerticalWall : Bool {
-        if (100...199).contains(self) {
-            return true
-        }
-        return false
+        return boardElement() == .rightBar
     }
     
     
     var isHorizontalWall : Bool {
-        if (200...299).contains(self) {
-            return true
-        }
-        return false
+        return boardElement() == .bottomBar
     }
     
-    
-    var isCell : Bool {
-        if (0...99).contains(self)  {
-            return true
-        }
-        return false
+    var isOutOfBound : Bool {
+        let ooo = [109,119,129,139,149,159,169,179,189,209,219,229,239,249,259,269,279,289]
+        return ooo.contains(self)
     }
+    
     
     func boardElement() -> BoardElement {
         if (0...99).contains(self)  {
